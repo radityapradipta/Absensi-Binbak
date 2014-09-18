@@ -14,8 +14,14 @@ class CreateAbsenceCategoriesTable extends Migration {
 	{
 		Schema::create('absence_categories', function(Blueprint $table)
 		{
-			$table->increments('id');
+			// ---------- FIELD ----------
+			$table->tinyInteger('id')->unsigned();
 			$table->string('name', 15);
+			
+			// ---------- KEY ----------
+			$table->primary('id');
+			
+			// ---------- OPTION ----------
 			$table->softDeletes();
 		});
 	}

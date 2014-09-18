@@ -3,7 +3,7 @@
 class AbsenceCategory extends Eloquent {
 
 	protected $table = 'absence_categories';
-	protected $fillable = array('name');
+	protected $fillable = array('id', 'name');
 	public $timestamps = false;
 	
 	// ---------- RELATION ----------

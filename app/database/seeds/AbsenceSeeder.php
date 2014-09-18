@@ -12,24 +12,27 @@ class AbsenceSeeder extends Seeder {
 		DB::table('absences')->delete();
 		
 		Absence::create(array(
-			'start'					=> strtotime("9/1/2014"),
-			'end'					=> strtotime("9/1/2014 +7 day"),
+			'id'					=> 1,		
+			'start'					=> '2014-08-01',
+			'end'					=> '2014-08-08',
 			'reason'				=> 'LIVE-IN',
 			'employee_id'			=> 2,
 			'absence_category_id'	=> 4
 		));
 		
 		Absence::create(array(
-			'start'					=> strtotime("9/9/2014"),
-			'end'					=> strtotime("9/1/2014 +1 day"),
+			'id'					=> 2,		
+			'start'					=> '2014-09-09 08:00:00',
+			'end'					=> '2014-09-09 10:00:00',
 			'reason'				=> 'Coaching Seminar Guru',
 			'employee_id'			=> 4,
 			'absence_category_id'	=> 5
 		));
 		
 		Absence::create(array(
-			'start'					=> strtotime("9/15/2014"),
-			'end'					=> strtotime("9/15/2014 +2 day"),
+			'id'					=> 3,		
+			'start'					=> '2014-09-15',
+			'end'					=> '2014-09-16',
 			'reason'				=> 'mendampingi karya wisata',
 			'employee_id'			=> 3,
 			'absence_category_id'	=> 4

@@ -14,9 +14,15 @@ class CreateDepartmentsTable extends Migration {
 	{
 		Schema::create('departments', function(Blueprint $table)
 		{
-			$table->increments('id');
+			// ---------- FIELD ----------
+			$table->integer('id')->unsigned();
 			$table->string('name', 30);
+			
+			// ---------- KEY ----------
+			$table->primary('id');
 			$table->integer('super_department_id')->nullable();//foreign key utk menunjuk parent departementnya
+			
+			// ---------- OPTION ----------
 			$table->softDeletes();
 		});
 	}

@@ -3,7 +3,7 @@
 class Department extends Eloquent {
 
 	protected $table = 'departments';
-	protected $fillable = array('name', 'super_department_id');
+	protected $fillable = array('id', 'name', 'super_department_id');
 	public $timestamps = false;
 	
 	// ---------- RELATION ----------

@@ -26,6 +26,16 @@
 				<td>{{ $employee->ssn or '-' }}</td>
 				<td>{{ $employee->name or '-' }}</td>
 				<td>{{ $employee->department->name or '-' }}</td>
+				<?php $absence_day = $employee->count_absence_day(9, 2014); ?>
+				{{-- lihat tabel absence_categories --}}
+				<td>{{ $absence_day[5-1] }}{{-- izin --}}</td>
+				<td>{{ $absence_day[7-1] }}{{-- sakit --}}</td>
+				<td>{{ $absence_day[4-1] }}{{-- tugas luar --}}</td>
+				<td>{{ $absence_day[8-1] }}{{-- lupa --}}</td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td>{{ $absence_day[3-1] + $absence_day[6-1] }}{{-- other + cuti --}}</td>
 			</tr>	
 		@endforeach
 	

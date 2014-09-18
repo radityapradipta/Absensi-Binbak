@@ -12,6 +12,7 @@ class EmployeeSeeder extends Seeder {
 		DB::table('employees')->delete();
 		
 		Employee::create(array(
+			'id'			=> 1,
 			'ssn'			=> 'BB1000',
 			'name'			=> 'ROSENTA',
 			'is_male'		=> FALSE,
@@ -21,6 +22,7 @@ class EmployeeSeeder extends Seeder {
 		));
 		
 		Employee::create(array(
+			'id'			=> 2,
 			'ssn'			=> 'BB1005',
 			'name'			=> 'BENJAMIN',
 			'is_male'		=> TRUE,
@@ -30,6 +32,7 @@ class EmployeeSeeder extends Seeder {
 		));
 		
 		Employee::create(array(
+			'id'			=> 3,		
 			'ssn'			=> 'BB1007',
 			'name'			=> 'RIKEU R',
 			'is_male'		=> FALSE,
@@ -39,6 +42,7 @@ class EmployeeSeeder extends Seeder {
 		));
 		
 		Employee::create(array(
+			'id'			=> 4,		
 			'ssn'			=> 'BB1014',
 			'name'			=> 'RIRIS',
 			'is_male'		=> FALSE,
@@ -48,6 +52,7 @@ class EmployeeSeeder extends Seeder {
 		));
 		
 		Employee::create(array(
+			'id'			=> 5,		
 			'ssn'			=> 'BB0102',
 			'name'			=> 'RINDARTI',
 			'is_male'		=> FALSE,
