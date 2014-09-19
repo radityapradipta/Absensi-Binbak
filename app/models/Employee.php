@@ -12,9 +12,23 @@ class Employee extends Eloquent {
 		return $this->belongsTo('Department');
 	}
 
+	public function schedules() {
+		return $this->belongsToMany('Schedule', 'employees_schedules', 'employee_id', 'schedule_id');
+	}
+	
 	public function absences() {
 		return $this->hasMany('Absence');
 	}
+		
+	public function autoChecks() {
+		return $this->hasMany('AutoCheck');
+	}
+
+	public function manualChecks() {
+		return $this->hasMany('ManualCheck');
+	}	
+			
+	// ---------- FUNCTION ----------
 	
 	public function count_absence_day($month, $year){
 		//menentukan akhir bulan 
@@ -27,11 +41,11 @@ class Employee extends Eloquent {
 		}	
 		
 		//query sesuai range awal bulan-akhir bulan 
-		$absences = $this->absences()->where('end', '>=', "$year-$month-01")->where('start', '<=', "$year-$month-$day")->get();		
+		$absences = $this->absences()->where('end_date', '>=', "$year-$month-01")->where('start_date', '<=', "$year-$month-$day")->get();		
 		$data = array(0,0,0,0,0,0,0,0);	
 		foreach ($absences as $a) {
-			$start = strtotime($a['start']);
-			$end = strtotime($a['end']);			
+			$start = strtotime($a['start_date']);
+			$end = strtotime($a['end_date']);			
 			if($start < strtotime("$year-$month-01")){//utk event (cuti, libur, dkk) yg mulai sejak bulan lalu
 				$start = strtotime("$year-$month-01");
 			}			

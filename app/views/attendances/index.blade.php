@@ -5,7 +5,22 @@
 @stop
 
 @section('content')
-    <p>This is my body content.</p>
+	
+	<br/><br/><br/><br/><br/>
+	<select>
+		<?php $month=array("Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sep", "Oct", "Nov", "Dec"); ?>
+		@for($i=1; $i<=12; $i++)	
+		<option value=="$i">{{ $month[$i-1] }}<option>
+		@endfor
+	</select>
+		
+	<select>
+		@for($i=2000; $i<=2099; $i++)	
+		<option value=="$i">{{ $i }}<option>
+		@endfor
+	</select>
+	<br/><br/><br/><br/><br/>
+		
 	<table border="1">
 		<tr>
 			<th>Kode Guru</th>
