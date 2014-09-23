@@ -16,8 +16,8 @@ class CreateAbsencesTable extends Migration {
 		{			
 			// ---------- FIELD ----------
 			$table->integer('id')->unsigned();
-			$table->dateTime('start_date');
-			$table->dateTime('end_date');
+			$table->date('start_date');
+			$table->date('end_date');
 			$table->string('reason',200)->nullable();	
 			
 			// ---------- KEY ----------

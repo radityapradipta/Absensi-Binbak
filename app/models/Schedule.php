@@ -9,7 +9,7 @@ class Schedule extends Eloquent {
 	// ---------- RELATION ----------
 
 	public function employees() {
-		return $this->belongsToMany('Employee', 'employees_schedules', 'employee_id', 'schedule_id');
+		return $this->belongsToMany('Employee', 'employees_schedules', 'schedule_id', 'employee_id');
 	}
 	
 	public function weekly_schedules() {

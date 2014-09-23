@@ -19,7 +19,7 @@ class ScheduleSeeder extends Seeder {
 
 		Schedule::create(array(
 			'id'			=> 2,		
-			'start_date'	=> '1900-01-01',
+			'start_date'	=> '2000-01-01',
 			'end_date'		=> '2100-01-01'
 		));		
 	}
