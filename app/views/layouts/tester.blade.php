@@ -4,9 +4,8 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Laravel</title>
-		{{-- HTML::style('css/foundation.css') --}}
-		{{-- HTML::script('js/vendor/modernizr.js') --}}
-		
+		{{ HTML::script('js/jquery-1.11.1.min.js') }}
+		{{ HTML::script('js/custom.js') }}
 		<style>
 			.absent-table{
 				font-size:0.8em;
@@ -14,7 +13,11 @@
 				border-collapse:collapse;				
 			}
 			.absent-row:nth-child(odd){
-				background-color:rgba(41, 128, 185,0.15);
+				background-color:rgba(41, 128, 185,0.05);
+			}
+			.absent-row:hover{
+				background-color:rgba(41, 128, 185,1.0);
+				color:white;
 			}
 			.absent-table th{				
 				color:black;
@@ -25,9 +28,7 @@
 			}			
 			.absent-table td{
 				padding:5.5px 3px 3px 3px;
-			}
-			
-			
+			}						
 			.weekend{
 				background-color:rgba(22, 160, 133,0.25);
 			}
@@ -66,11 +67,6 @@
 				@yield('content')
 			</div>
 		</div>
-    
-		{{-- HTML::script('js/vendor/jquery.js') --}}
-		{{-- HTML::script('js/foundation.min.js') --}}
-		<script>
-			//$(document).foundation();
-		</script>
+
 	</body>
 </html>

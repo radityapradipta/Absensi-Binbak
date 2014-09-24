@@ -22,40 +22,7 @@ class MyDate {
 		}	
 		return $day;
 	}
-	
-	/*
-	 * Fungsi utk mengubah ke awal hari (pukul 00:00:00).
-	 */	
-	public static function set_start_of_day($date){
-		return date('Y-m-d 00:00:00', strtotime($date));
-	}
-	
-	/*
-	 * Fungsi utk mengubah ke akhir hari (pukul 23:59:59).
-	 */		
-	public static function set_end_of_day($date){
-		return date('Y-m-d 23:59:59', strtotime($date));
-	}
-	
-	/*
-	 * Fungsi utk mengecek apakah tanggal ada di dlm range.
-	 */	
-	public static function is_in_range($date, $start_date, $end_date){
-		$date_ts = strtotime($date);
-		$start_ts = strtotime(MyDate::set_start_of_day($start_date));
-		$end_ts = strtotime(MyDate::set_end_of_day($end_date));
-		return (($start_ts <= $date_ts) && ($date_ts <= $end_ts));
-	}
 
-	/*
-	 * Fungsi utk mengecek apakah tanggalnya sama (waktu diabaikan).
-	 */	
-	public static function is_same_date($date_1, $date_2){
-		$date_1 = strtotime(MyDate::set_start_of_day($date_1));
-		$date_2 = strtotime(MyDate::set_start_of_day($date_2));
-		return ($date_1==$date_2);
-	}
-	
 	/*
 	 * Fungsi utk mengecek apakah terlambat datang.
 	 */	

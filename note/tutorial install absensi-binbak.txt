@@ -1,0 +1,13 @@
+1. buka mysql (phpmyadmin), buat database absensi-binbak
+2. pastikan database absensi-binbak masih kosong, drop seluruh tabel kalau sudah diisi
+3. silakan ubah username & password database di ..\xampp\htdocs\Absensi-Binbak\app\config\database.php line 59-60
+
+1. buka cmd
+2. pindah ke direktori ..\xampp\htdocs\Absensi-Binbak
+3. ketik di cmd: php artisan serve
+4. ketik di cmd: php artisan migrate
+5. ketik di cmd: php artisan db:seed
+
+1. buka di browser: http://localhost:8000/ >> proyek laravel direktori publik
+2. http://localhost:8000/absensi/
+3. http://localhost:8000/absensi/department/1/year/2014/month/9/

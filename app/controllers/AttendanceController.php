@@ -9,12 +9,26 @@ class AttendanceController extends BaseController {
 	
     public function index()
     {
-		$employees = Employee::all();
-		//$results = $this->guru->getData();
-		//$g1=array('kode'=>'BB0113','nama'=>'Esther');
-		//$g2=array('kode'=>'BB0125','nama'=>'Gloria');
-		//$guru=array($g1,$g2);
-        return View::make('attendances.index',array('employees'=>$employees));
+		//$employees = Employee::all();
+        //return View::make('attendances.index',array('employees'=>$employees));
+		$departments = Department::all();
+		return View::make('attendances.index',array('departments'=>$departments));
     }
-
+	
+	public function showTable($id, $year, $month){
+		$parameters = array('id'=>intval($id), 'year'=>intval($year), 'month'=>intval($month));
+		$departments = Department::all();
+		
+		$y=date('Y');
+		$m=date('n');		
+		if($year>$y || ($year==$y && $month>$m)){
+			return View::make('attendances.index',array('valid'=>FALSE, 'departments'=>$departments, 'parameters'=>$parameters));//data hanya tersedia utk bulan/tahun yg lewat
+		}
+		
+		$departments = Department::all();
+		$employees = Employee::where('department_id', '=', "$id")->get();	
+				
+		return View::make('attendances.index',array('valid'=>TRUE, 'departments'=>$departments, 'employees'=>$employees, 'parameters'=>$parameters));
+	}
+	
 }
