@@ -51,22 +51,8 @@
 		</style>
 	</head>
 	<body>
-    
-		<div class="row">
-			<div class="large-12 columns">
-				<h1>Laravel</h1>
-			</div>
-		</div>
-		
-		@section('custom')
-            This is the master sidebar.
-        @show		
-		
-		<div class="row">
-			<div class="large-12 columns">
-				@yield('content')
-			</div>
-		</div>
 
+		@yield('content')
+	
 	</body>
 </html>

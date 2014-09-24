@@ -1,12 +1,7 @@
 @extends('layouts.tester')
 
-@section('custom')
-	<p>This is appended to the master sidebar.</p>  @parent
-@stop
-
 @section('content')
-	
-	<br/><br/><br/><br/><br/>
+		
 	<select id="absent-department">
 		@foreach ($departments as $department)	
 			@if(isset($parameters['id']) && $department['id']==$parameters['id'])
