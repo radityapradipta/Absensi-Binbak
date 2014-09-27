@@ -15,4 +15,8 @@ class Department extends Eloquent {
 	public function superDepartment() {
 		return $this->belongsTo('Department');
 	}
+	
+	public function allowance() {
+		return $this->belongsTo('Allowance');
+	}
 }

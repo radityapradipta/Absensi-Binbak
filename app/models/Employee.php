@@ -51,7 +51,8 @@ class Employee extends Eloquent {
 		}	
 		
 		//ambil data uang konsumsi	
-		$allowance = array('weekday'=>20000,'weekend'=>5000,'pulang_awal'=>15000);
+		$allowances = $this->department()->first()->allowance()->first();//->allowance();
+		$allowance = array('weekday'=>$allowances->weekday_nominal,'weekend'=>$allowances->weekend_nominal,'pulang_awal'=>($allowances->weekday_nominal-$allowances->cut_nominal));
 		
 		//data utk disimpan
 		$data = array(

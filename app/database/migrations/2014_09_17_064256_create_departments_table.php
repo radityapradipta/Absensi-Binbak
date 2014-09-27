@@ -21,6 +21,7 @@ class CreateDepartmentsTable extends Migration {
 			// ---------- KEY ----------
 			$table->primary('id');
 			$table->integer('super_department_id')->nullable();//foreign key utk menunjuk parent departementnya
+			$table->integer('allowance_id');//foreign key utk menunjuk nominal uang konsumsi
 			
 			// ---------- OPTION ----------
 			$table->softDeletes();

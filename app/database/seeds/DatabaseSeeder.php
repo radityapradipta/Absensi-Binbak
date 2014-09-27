@@ -29,7 +29,9 @@ class DatabaseSeeder extends Seeder {
 		$this->call('AutoCheckSeeder');
 		$this->command->info('AutoCheck seeds finished.');		
 		$this->call('ManualCheckSeeder');
-		$this->command->info('ManualCheck seeds finished.');				
+		$this->command->info('ManualCheck seeds finished.');	
+		$this->call('AllowanceSeeder');
+		$this->command->info('Allowance seeds finished.');
 		
 	}
 
