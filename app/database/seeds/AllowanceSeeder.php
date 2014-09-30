@@ -22,6 +22,18 @@ class AllowanceSeeder extends Seeder {
 			'weekend_nominal'	=> 5000,
 			'cut_nominal'		=> 5000
 		));
+		
+		Allowance::create(array(		
+			'weekday_nominal'	=> 15000,
+			'weekend_nominal'	=> 10000,
+			'cut_nominal'		=> 5000
+		));
+		
+		Allowance::create(array(		
+			'weekday_nominal'	=> 25000,
+			'weekend_nominal'	=> 15000,
+			'cut_nominal'		=> 5000
+		));
 	}
 
 }

@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
+		{{ HTML::script('js/jquery-1.11.1.min.js') }}
+		{{ HTML::script('js/custom.js') }}
 	<head>		
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -27,11 +29,11 @@
 			<section class="sidebar_nav_bar">
 				<ul>
 					<li><a href="#" class="sidebar_brand">DASHBOARD</a></li>
-					<li><a href="{{ URL::route('index') }}">VIEW ALLOWANCE</a></li>
-					<li><a href="{{ URL::route('manage-allowance') }}">MANAGE ALLOWANCE</a></li>
-					<li><a href="{{ URL::route('manage-user') }}">MANAGE USER</a></li>
-					<li><a href="{{ URL::route('convert-document') }}">CONVERT DOCUMENT</a></li>
-					<li><a href="{{ URL::route('edit-profile') }}">EDIT PROFILE</a></li>
+					<li><a href="{{ URL::to('allowance') }}">VIEW ALLOWANCE</a></li>
+					<li><a href="{{ URL::to('allowance/manage') }}">MANAGE ALLOWANCE</a></li>
+					<li><a href="{{-- URL::route('manage-user') --}}">MANAGE USER</a></li>
+					<li><a href="{{-- URL::route('convert-document') --}}">CONVERT DOCUMENT</a></li>
+					<li><a href="{{ URL::to('user/edit') }}">EDIT PROFILE</a></li>
 				</ul>
 			</section>
 			

@@ -10,19 +10,19 @@ class IndexController extends BaseController {
 	}
 	
 	public function manageUser(){
-		return View::make('layout.manageUser');
+		return View::make('layouts.manageUser');
 	}
 	
 	public function convertDocument(){
-		return View::make('layout.convertDocument');
+		return View::make('layouts.convertDocument');
 	}
 	
 	public function editProfile(){
-		return View::make('layout.editProfile');
+		return View::make('layouts.editProfile');
 	}
 	
 	public function showLogin(){
-		return View::make('layout.login');
+		return View::make('layouts.login');
 	}
 	
 	/*public function getAllowance(){

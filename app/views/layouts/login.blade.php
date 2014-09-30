@@ -1,4 +1,4 @@
-@extends('layout.main')
+@extends('layouts.main')
 	<div class="page_content">
 		<div class="tableed">
 			<div class="celled">
