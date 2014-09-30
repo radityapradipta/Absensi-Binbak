@@ -12,6 +12,13 @@ $(document).ready(function(){
 		window.location.replace(url+"allowance/view/department/"+id+"/year/"+year+"/month/"+month+"/")
 	});
 	
+	$("#allowance-download-button").click(function() {
+		var id=$("#allowance-department").val();
+		var month=$("#allowance-month").val();
+		var year=$("#allowance-year").val();
+		window.location.replace(url+"allowance/download/department/"+id+"/year/"+year+"/month/"+month+"/")
+	});
+	
 	$("#allowance-select").change(function() {
 		var id=$("#allowance-select").val();
 		window.location.replace(url+"allowance/manage/department/"+id+"/")

@@ -17,7 +17,7 @@
 			<div class="content_field">
 				<form>
 					<select class="content_dropDown" id="allowance-month">
-						<?php $month=array("Januari", "Febuari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"); ?>
+						<?php $month=array("January", "Febuari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"); ?>
 						@for($i=1; $i<=12; $i++)	
 							@if(isset($parameters['month']) && $i==$parameters['month'])
 								<option value="{{ $i }}" selected>{{ $month[$i-1] }}</option>
@@ -221,8 +221,14 @@
 					<th class="number">{{ number_format($total, 0, ',', '.') }}</th>
 				</tr>
 			</table>	
+			
+			
+			<div class="content_button">
+				<button type="button" id="allowance-download-button" class="btn btn-primary-mod">Download</button>
+			</div>
 		@endif
 
+		
 	</div>
 </div>
 @stop

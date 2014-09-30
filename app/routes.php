@@ -22,7 +22,8 @@ Route::get('/', function()
 
 Route::group(array('prefix' => 'allowance'), function(){
 	Route::get('/', array('uses' => 'AllowanceController@view'));		
-	Route::get('view/department/{id}/year/{year}/month/{month}/', array('uses' => 'AllowanceController@showTable'));
+	Route::get('view/department/{id}/year/{year}/month/{month}/', array('uses' => 'AllowanceController@viewTable'));
+	Route::get('download/department/{id}/year/{year}/month/{month}/', array('uses' => 'AllowanceController@downloadTable'));
 	Route::get('manage', array('uses' => 'AllowanceController@manage'));
 	Route::get('manage/department/{id}', array('uses' => 'AllowanceController@manageDepartment'));	
 	Route::put('manage', array('uses' => 'AllowanceController@applyChange'));

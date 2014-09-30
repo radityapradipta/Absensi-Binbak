@@ -46,4 +46,8 @@ class MyDate {
 		$schedule_time = strtotime('12:00:00');
 		return ($date_time < $schedule_time);
 	}
+		
+	public static function get_month_names(){
+		return array('January','February','March','April','May','June','July','August','September','October','November','December');
+	}
 }
