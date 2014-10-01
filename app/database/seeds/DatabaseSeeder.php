@@ -32,7 +32,10 @@ class DatabaseSeeder extends Seeder {
 		$this->command->info('ManualCheck seeds finished.');	
 		$this->call('AllowanceSeeder');
 		$this->command->info('Allowance seeds finished.');
-		
+		$this->call('RoleSeeder');
+		$this->command->info('Role seeds finished.');
+		$this->call('AccountSeeder');
+		$this->command->info('Account seeds finished.');
 	}
 
 }

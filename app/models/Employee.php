@@ -8,6 +8,10 @@ class Employee extends Eloquent {
 		
 	// ---------- RELATION ----------
 	
+	public function account() {
+		return $this->hasOne('Account');
+	}	
+	
 	public function department() {
 		return $this->belongsTo('Department');
 	}
