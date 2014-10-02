@@ -50,13 +50,26 @@ Route::group(array('prefix' => 'user'), function(){
 	Route::get('edit', array(
 		'uses' => 'UserController@edit'
 	));	
+});
+
+
+Route::group(array('before' => 'guest'), function(){
+	/*
+	CSRF protection group
+	*/
+	Route::group(array('before' => 'csrf'), function(){
+		Route::post('home', array(
+			'as' => 'account-sign-in-post',
+			'uses' => 'UserController@postSignIn'
+		));
+	});
 	
-	Route::post('home', array(
-		'as' => 'account-sign-in-post',
-		'uses' => 'UserController@postSignIn'
-	));
+	
 });
 /*
+
+
+
 
 Route::get('/', array(
 	'as' => 'index',

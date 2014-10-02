@@ -32,7 +32,7 @@ class UserController extends BaseController {
 				'password' => Input::get('password')
 			));
 			if($auth){
-				return Redirect::intended('/');
+				return Redirect::intended('/allowance');
 			}else{
 				return Redirect::route('login')
 						->with('global','Username/Password wrong');
@@ -41,6 +41,4 @@ class UserController extends BaseController {
 		return Redirect::route('login')
 				->with('global','There was a problem signing you in.');
 	}
-	
-	
 }

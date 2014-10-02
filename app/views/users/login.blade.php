@@ -60,10 +60,14 @@
 						@if($errors->has('password'))
 							{{ $errors->first('password') }}
 						@endif
+						@if(Session::has('global'))
+							<p>{{ Session::get('global') }}</p>
+						@endif
 						<div class="content_button">
 							<input type="submit" class="btn btn-primary-mod" value="Log In">
 						</div>
-
+						{{ Form::token() }}
+						
 					</form>
 				</div>
 			</section>
