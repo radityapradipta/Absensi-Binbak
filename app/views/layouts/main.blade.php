@@ -16,7 +16,6 @@
 		<!-- Bootstrap Custom -->
 		<link href="{{ asset('assets/css/bootstrap_custom.css') }}" rel="stylesheet">
 		
-		
 		<!-- Custom -->
 		<link href="{{ asset('assets/css/custom_style_00.css') }}" rel="stylesheet">
 		<title>
