@@ -23,7 +23,7 @@ class UserController extends BaseController {
 			)
 		);
 		if($validator -> fails()){
-			return Redirect::route('login')
+			return Redirect::back()
 					->withErrors($validator)
 					->withInput();
 		}else{
@@ -32,13 +32,15 @@ class UserController extends BaseController {
 				'password' => Input::get('password')
 			));
 			if($auth){
-				return Redirect::intended('/allowance');
+				return Redirect::route('allowance');
 			}else{
-				return Redirect::route('login')
+				return Redirect::back()
 						->with('global','Username/Password wrong');
 			}
 		}
-		return Redirect::route('login')
+		return Redirect::back()
 				->with('global','There was a problem signing you in.');
 	}
+	
+	
 }

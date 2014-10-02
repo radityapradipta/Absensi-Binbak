@@ -17,7 +17,7 @@ class CreateAccountsTable extends Migration {
 			// ---------- FIELD ----------
 			$table->increments('id');
 			$table->string('username', 30);
-			$table->string('password', 30);
+			$table->string('password', 100);
 			$table->string('remember_token', 100)->nullable();
 			
 			// ---------- KEY ------------

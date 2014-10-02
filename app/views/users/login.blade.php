@@ -67,7 +67,6 @@
 							<input type="submit" class="btn btn-primary-mod" value="Log In">
 						</div>
 						{{ Form::token() }}
-						
 					</form>
 				</div>
 			</section>

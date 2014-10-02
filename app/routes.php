@@ -22,6 +22,7 @@ Route::get('/', array(
 
 Route::group(array('prefix' => 'allowance'), function(){
 	Route::get('/', array(
+		'as' => 'allowance',
 		'uses' => 'AllowanceController@view'
 	));
 	
@@ -50,22 +51,14 @@ Route::group(array('prefix' => 'user'), function(){
 	Route::get('edit', array(
 		'uses' => 'UserController@edit'
 	));	
+	Route::post('/', array(
+		'as' => 'account-sign-in-post',
+		'uses' => 'UserController@postSignIn'
+	));
 });
 
 
-Route::group(array('before' => 'guest'), function(){
-	/*
-	CSRF protection group
-	*/
-	Route::group(array('before' => 'csrf'), function(){
-		Route::post('home', array(
-			'as' => 'account-sign-in-post',
-			'uses' => 'UserController@postSignIn'
-		));
-	});
-	
-	
-});
+
 /*
 
 
