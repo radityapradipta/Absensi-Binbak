@@ -3,11 +3,11 @@
 class AccessConverter {
 
     private $dbh;
-    private $last_convert_file = 'Last Convert.txt';
+    private $last_convert_file = '\Last Convert.txt';
 
     public function __construct() {
         try {
-            $this->dbh = new PDO('odbc:Driver={Microsoft Access Driver (*.mdb)};Dbq=' . __DIR__ . '\..\..\public\att2000.mdb');
+            $this->dbh = new PDO('odbc:Driver={Microsoft Access Driver (*.mdb)};Dbq=' . public_path() . '\att2000.mdb');
         } catch (PDOException $e) {
             echo 'Connection failed: ' . $e->getMessage() . "\n";
         }
@@ -23,11 +23,11 @@ class AccessConverter {
     }
 
     public function readFile() {
-        return explode(';', file_get_contents($this->last_convert_file));
+        return explode(';', file_get_contents(public_path() . $this->last_convert_file));
     }
 
     public function updateFile($starts) {
-        $file = fopen($this->last_convert_file, 'w');
+        $file = fopen(public_path() . $this->last_convert_file, 'w');
         fwrite($file, implode(';', $starts));
         fclose($file);
     }

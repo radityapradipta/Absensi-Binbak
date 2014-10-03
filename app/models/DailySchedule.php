@@ -2,14 +2,14 @@
 
 class DailySchedule extends Eloquent {
 
-	protected $table = 'daily_schedules';
-	protected $fillable = array('id', 'name', 'start_time', 'end_time');
-	public $timestamps = false;
-		
-	// ---------- RELATION ----------
+    protected $table = 'daily_schedules';
+    protected $fillable = array('id', 'name', 'start_time', 'end_time');
+    public $timestamps = false;
 
-	public function weeklySchedules() {
-		return $this->hasMany('WeeklySchedule');
-	}
+    // ---------- RELATION ----------
+
+    public function weeklySchedules() {
+        return $this->hasMany('WeeklySchedule');
+    }
 
 }
