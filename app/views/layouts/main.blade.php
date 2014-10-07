@@ -16,6 +16,8 @@
 
         <!-- Custom -->
         <link href="{{ asset('assets/css/custom_style_00.css') }}" rel="stylesheet">
+		
+		{{ HTML::style('assets/css/fluid_grid.css') }}
         <title>
 
         </title>
@@ -28,7 +30,7 @@
                     <li><a href="#" class="sidebar_brand">DASHBOARD</a></li>
                     <li><a href="{{ URL::to('allowance') }}">VIEW ALLOWANCE</a></li>
                     <li><a href="{{ URL::to('allowance/manage') }}">MANAGE ALLOWANCE</a></li>
-                    <li><a href="{{-- URL::route('manage-user') --}}">MANAGE USER</a></li>
+                    <li><a href="{{ URL::to('user/manage') }}">MANAGE USER</a></li>
                     <li><a href="{{ URL::to('converter') }}">CONVERT DOCUMENT</a></li>
                     <li><a href="{{ URL::to('user/edit') }}">EDIT PROFILE</a></li>
                 </ul>
@@ -39,6 +41,6 @@
             </section>
         </section>
         {{ HTML::script('js/jquery-1.11.1.min.js') }}
-        {{ HTML::script('js/custom.js') }}
+        {{ HTML::script('js/custom.js') }}{{ HTML::script('js/modal.js') }}
     </body>
 </html>	

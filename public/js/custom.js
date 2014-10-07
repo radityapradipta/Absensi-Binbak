@@ -51,7 +51,29 @@ $(document).ready(function() {
         });
 
     });
-
+	
+	$(".user-edit-button").click(function(){
+		var parent=$(this).closest("li");		
+		$("#edit-ssn").val(parent.children(".ssn").text());
+		$("#edit-username").val(parent.children(".username").text());
+		$("#user-edit-modal").modal();
+	});
+	
+	$("#edit-password-toggle").click(function(){
+		console.log("a"+$('#edit-password-toggle').attr('Checked'));
+		if($('#edit-password-toggle').is(":checked") ){
+			$('#edit-password').show();
+		}else{
+			$('#edit-password').hide();
+		}
+	});
+	
+    //MENU MANAGE USER
+    $("#role-select").change(function() {
+        var id = $("#role-select").val();
+        window.location.replace(url + "user/manage/role/" + id + "/");
+    });
+	
     $("#convert-button").click(function() {
         $.post(url + "converter/", function(data) {
             $('#loading').hide();

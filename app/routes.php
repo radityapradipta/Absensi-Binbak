@@ -47,6 +47,13 @@ Route::group(array('prefix' => 'allowance'), function() {
 });
 
 Route::group(array('prefix' => 'user'), function() {
+    Route::get('manage', array(
+        'uses' => 'UserController@manage'
+    ));
+    Route::get('manage/role/{id}', array(
+        'uses' => 'UserController@manageRole'
+    ));
+	
     Route::get('edit', array(
         'uses' => 'UserController@edit'
     ));
@@ -54,6 +61,7 @@ Route::group(array('prefix' => 'user'), function() {
         'as' => 'account-sign-in-post',
         'uses' => 'UserController@postSignIn'
     ));
+	
 });
 
 Route::group(array('prefix' => 'converter'), function() {

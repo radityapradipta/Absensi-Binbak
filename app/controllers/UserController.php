@@ -35,5 +35,15 @@ class UserController extends BaseController {
         }
         return Redirect::back()->with('global', 'There was a problem signing you in.');
     }
-
+	
+	public function manage() {
+	    $roles = Role::all();
+        return View::make('users.manage',array('roles' => $roles));
+    }
+	
+	public function manageRole($id) {
+	    $roles = Role::all();
+		$accounts = Account::where('role_id', '=', "$id")->get();
+        return View::make('users.manage',array('roles' => $roles, 'role_id' => $id, 'accounts'=>$accounts));
+    }
 }

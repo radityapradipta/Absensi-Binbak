@@ -224,13 +224,13 @@ html{
 	
 	.page_table > li > div{
 		display:inline;
-		margin-right:110px;
+		/*margin-right:110px;*/
 		height:auto;
 		line-height:50px;
-		margin-left:35px;
+		/*margin-left:35px;*/
 	}
 	
 	.page_table>li>div:nth-child(3) {
-		margin-left:220px;
-		margin-right:50px;
+		/*margin-left:220px;
+		margin-right:50px;*/
 	}
