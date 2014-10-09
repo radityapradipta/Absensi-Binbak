@@ -1,0 +1,10 @@
+\select@language {bahasa}
+\contentsline {section}{\numberline {1}Pendahuluan}{1}{section.1}
+\contentsline {subsection}{\numberline {1.1}Deskripsi}{1}{subsection.1.1}
+\contentsline {subsection}{\numberline {1.2}Fitur}{1}{subsection.1.2}
+\contentsline {section}{\numberline {2}Implementasi}{2}{section.2}
+\contentsline {subsection}{\numberline {2.1}Lingkungan Pendukung}{2}{subsection.2.1}
+\contentsline {subsection}{\numberline {2.2}Petunjuk Instalasi}{2}{subsection.2.2}
+\contentsline {section}{\numberline {3}Manual}{3}{section.3}
+\contentsline {subsection}{\numberline {3.1}Halaman Awal (\textit {Log In})}{3}{subsection.3.1}
+\contentsline {subsection}{\numberline {3.2}Halaman }{3}{subsection.3.2}
