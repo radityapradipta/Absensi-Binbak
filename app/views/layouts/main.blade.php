@@ -6,18 +6,19 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <!-- Normalize -->
-        <link href="{{ asset('assets/css/normalize.css') }}" rel="stylesheet">
+        {{ HTML::style('assets/css/normalize.css') }}
 
         <!-- Bootstrap -->
-        <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet">
+        {{ HTML::style('assets/css/bootstrap.min.css') }}
 
         <!-- Bootstrap Custom -->
-        <link href="{{ asset('assets/css/bootstrap_custom.css') }}" rel="stylesheet">
+        {{ HTML::style('assets/css/bootstrap_custom.css') }}
 
         <!-- Custom -->
-        <link href="{{ asset('assets/css/custom_style_00.css') }}" rel="stylesheet">
-		
-		{{ HTML::style('assets/css/fluid_grid.css') }}
+        {{ HTML::style('assets/css/custom_style_00.css') }}
+
+        {{ HTML::style('assets/css/fluid_grid.css') }}
+        {{ HTML::style('assets/css/uploadfile.min.css') }}
         <title>
 
         </title>
@@ -40,7 +41,10 @@
                 @yield('content')
             </section>
         </section>
-        {{ HTML::script('js/jquery-1.11.1.min.js') }}
-        {{ HTML::script('js/custom.js') }}{{ HTML::script('js/modal.js') }}
+        {{ HTML::script('assets/js/jquery-1.11.1.min.js') }}
+        {{ HTML::script('assets/js/modal.js') }}
+        {{ HTML::script('assets/js/jquery.form.js') }}
+        {{ HTML::script('assets/js/jquery.uploadfile.min.js') }}
+        {{ HTML::script('js/custom.js') }}
     </body>
 </html>	

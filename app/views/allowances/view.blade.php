@@ -14,16 +14,16 @@
         </div>
 
         <div class="content_field">
-			<select class="content_dropDown" id="allowance-month">
-				<?php $month = array("January", "Febuari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"); ?>
-				@for($i=1; $i<=12; $i++)	
-					@if(isset($parameters['month']) && $i==$parameters['month'])
-						<option value="{{ $i }}" selected>{{ $month[$i-1] }}</option>
-					@else
-						<option value="{{ $i }}">{{ $month[$i-1] }}</option>
-					@endif	
-				@endfor
-			</select>            
+            <select class="content_dropDown" id="allowance-month">
+                <?php $month = array("January", "Febuari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"); ?>
+                @for($i=1; $i<=12; $i++)	
+                @if(isset($parameters['month']) && $i==$parameters['month'])
+                <option value="{{ $i }}" selected>{{ $month[$i-1] }}</option>
+                @else
+                <option value="{{ $i }}">{{ $month[$i-1] }}</option>
+                @endif	
+                @endfor
+            </select>            
         </div>
         <!---------------- Da Text Field -------------------->
 
@@ -34,15 +34,15 @@
         </div>
 
         <div class="content_field">            
-			<select class="content_dropDown" id="allowance-department">
-				@foreach ($departments as $department)	
-					@if(isset($parameters['id']) && $department['id']==$parameters['id'])
-						<option value="{{ $department['id'] }}" selected>{{ $department['name'] }}</option>
-					@else
-						<option value="{{ $department['id'] }}">{{ $department['name'] }}</option>
-					@endif	
-				@endforeach
-			</select>           
+            <select class="content_dropDown" id="allowance-department">
+                @foreach ($departments as $department)	
+                @if(isset($parameters['id']) && $department['id']==$parameters['id'])
+                <option value="{{ $department['id'] }}" selected>{{ $department['name'] }}</option>
+                @else
+                <option value="{{ $department['id'] }}">{{ $department['name'] }}</option>
+                @endif	
+                @endforeach
+            </select>           
         </div>
         <!---------------- Da Text Field -------------------->
 
@@ -60,13 +60,13 @@
 
         <div class="content_field">
             <select class="content_dropDown" id="allowance-year"/>
-                @for($i=date('Y'); $i>=1990; $i--)	
-					@if(isset($parameters['year']) && $i==$parameters['year'])
-						<option value="{{ $i }}" selected>{{ $i }}</option>
-					@else
-						<option value="{{ $i }}">{{ $i }}</option>
-					@endif	
-                @endfor
+            @for($i=date('Y'); $i>=1990; $i--)	
+            @if(isset($parameters['year']) && $i==$parameters['year'])
+            <option value="{{ $i }}" selected>{{ $i }}</option>
+            @else
+            <option value="{{ $i }}">{{ $i }}</option>
+            @endif	
+            @endfor
             </select>
         </div>
 

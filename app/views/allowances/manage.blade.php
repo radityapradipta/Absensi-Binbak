@@ -16,14 +16,14 @@
 
             <div class="content_field">
                 <select class="content_dropDown" id="allowance-select"/>
-					<option value="-1" disabled selected>Select Unit</option>
-					@foreach ($departments as $department)	
-						@if(isset($dept) && $department['id']==$dept->id)
-							<option value="{{ $department['id'] }}" selected>{{ $department['name'] }}</option>
-						@else
-							<option value="{{ $department['id'] }}">{{ $department['name'] }}</option>
-						@endif	
-					@endforeach
+                <option value="-1" disabled selected>Select Unit</option>
+                @foreach ($departments as $department)	
+                @if(isset($dept) && $department['id']==$dept->id)
+                <option value="{{ $department['id'] }}" selected>{{ $department['name'] }}</option>
+                @else
+                <option value="{{ $department['id'] }}">{{ $department['name'] }}</option>
+                @endif	
+                @endforeach
                 </select>
             </div>
             <!---------------- Da Text Field -------------------->

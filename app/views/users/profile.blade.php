@@ -49,7 +49,7 @@
 
             <div class="content_button">
                 <button type="submit" class="btn btn-primary-mod">Confirm</button>
-				<br/><br/><div class="alert" id="profile-edit-message"></div>
+                <br/><br/><div class="alert" id="profile-edit-message"></div>
             </div>
         </div>
 
