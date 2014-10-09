@@ -50,13 +50,19 @@ Route::group(array('prefix' => 'user'), function() {
     Route::get('manage', array(
         'uses' => 'UserController@manage'
     ));
+	
     Route::get('manage/role/{id}', array(
         'uses' => 'UserController@manageRole'
     ));
 	
     Route::get('edit', array(
-        'uses' => 'UserController@edit'
+        'uses' => 'UserController@editPassword'
     ));
+	
+    Route::post('edit', array(
+        'uses' => 'UserController@savePassword'
+    ));
+	
     Route::post('/', array(
         'as' => 'account-sign-in-post',
         'uses' => 'UserController@postSignIn'

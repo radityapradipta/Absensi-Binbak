@@ -198,7 +198,10 @@ html{
 		position:relative;
 		float:left;
 	}	
-	
+	.page_table>li{
+		overflow:auto;
+		padding:0;margin:0;width:100%;
+	}
 	.page_table>li:nth-child(1) {
 		font-weight:700;
 	}

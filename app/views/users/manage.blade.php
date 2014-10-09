@@ -85,22 +85,20 @@
 							
 				<ul class="page_table">
 					<li class="container_12">
-						<div class="grid_2">Kode SSN</div>
-						<div class="grid_6">Username</div>
-						<div class="grid_2">Role</div>					
+						<div class="grid_3">Kode SSN</div>
+						<div class="grid_4">Username</div>
+						<div class="grid_3">Role</div>					
 						<div class="grid_1"></div>
 						<div class="grid_1"></div>
 					</li>
-					<br class="clear"/>
 					@foreach ($accounts as $account)	
 						<li class="container_12" data-id="{{ $account['id'] }}">
-							<div class="grid_2 ssn">{{ $account->employee->ssn }}</div>
-							<div class="grid_6 username">{{ $account['username'] }}</div>
-							<div class="grid_2 role">{{ $account->role->name }}</div>
+							<div class="grid_3 ssn">{{ $account->employee->ssn }}</div>
+							<div class="grid_4 username">{{ $account['username'] }}</div>
+							<div class="grid_3 role">{{ $account->role->name }}</div>
 							<div class="grid_1"><a class="user-edit-button" href="#">Edit</a></div>
 							<div class="grid_1"><a>Delete</a></div>
 						</li>
-						<br class="clear"/>
 					@endforeach 
 				</ul>
 			

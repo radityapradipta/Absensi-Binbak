@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('content')
-<form>
+<form id="edit-profile">
     <div class="page_title">
         Edit Profile
     </div>
@@ -16,7 +16,7 @@
 
             <div class="content_field">
 
-                <input type="password" class="content_text_field">
+                <input type="password" class="content_text_field" id="old-password" required/>
 
             </div>
             <!---------------- Da Text Field -------------------->
@@ -29,7 +29,7 @@
 
             <div class="content_field">
 
-                <input type="password" class="content_text_field">
+                <input type="password" class="content_text_field" id="new-password" required/>
 
             </div>
             <!---------------- Da Text Field -------------------->
@@ -42,13 +42,14 @@
 
             <div class="content_field">
 
-                <input type="password" class="content_text_field">
+                <input type="password" class="content_text_field" id="confirm-password" required/>
 
             </div>
             <!---------------- Da Text Field -------------------->
 
             <div class="content_button">
-                <button type="button" class="btn btn-primary-mod">Confirm</button>
+                <button type="submit" class="btn btn-primary-mod">Confirm</button>
+				<br/><br/><div class="alert" id="profile-edit-message"></div>
             </div>
         </div>
 

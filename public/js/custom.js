@@ -34,19 +34,15 @@ $(document).ready(function() {
         $.ajax({
             type: "PUT",
             dataType: "json",
-            url: url + "allowance/manage/",
+            url: url + "allowance/manage",
             data: param,
             success: function(result) {
+				var message=$("#allowance-save-message");
                 if (result.valid) {
-                    $("#allowance-save-message").text("Success!");
-                    $("#allowance-save-message").addClass("alert-success");
-                    $("#allowance-save-message").show();
+                    message.text('The allowance is successfully changed.');
+                    message.addClass("alert-success");
+                    message.show();
                 }
-            },
-            error: function(result) {
-                $("#allowance-save-message").text("Error!");
-                $("#allowance-save-message").addClass("alert-danger");
-                $("#allowance-save-message").show();
             }
         });
 
@@ -80,4 +76,37 @@ $(document).ready(function() {
         });
         $('#loading').show();
     });
+	
+	//MENU EDIT PROFILE
+    $("#edit-profile").submit(function(event) {
+		event.preventDefault();
+		
+		if($("#new-password").val().localeCompare($("#confirm-password").val())!=0){
+			message.text("The password does not match the confirmation.");
+            message.addClass("alert-danger");
+            message.show();
+		}else{			
+			var param = {
+				'old-password': $("#old-password").val(),
+				'new-password': $("#new-password").val()
+			};
+			$.post(url + "user/edit",param, function(data) {				
+				if(data.valid){					
+					var message=$("#profile-edit-message");
+					message.text(data.message);
+					message.addClass("alert-success");
+					message.show();
+					$("#old-password").val("");
+					$("#new-password").val("");
+					$("#confirm-password").val("");
+				}else{
+					var message=$("#profile-edit-message");
+					message.text(data.message);
+					message.addClass("alert-danger");
+					message.show();
+				}
+			});
+		}
+    });
+	
 });
