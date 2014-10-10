@@ -19,7 +19,7 @@ class CreateAccountsTable extends Migration {
 			$table->string('username', 30);
 			$table->string('password', 100);
 			$table->string('remember_token', 100)->nullable();
-			
+			$table->date('updated_at')->nullable();
 			// ---------- KEY ------------
 			$table->integer('employee_id')->nullable();//foreign key utk join dgn employee
 			$table->integer('role_id')->nullable();//foreign key utk join dgn employee

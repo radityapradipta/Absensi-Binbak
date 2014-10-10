@@ -14,9 +14,9 @@ Route::pattern('id', '[0-9]+');
 Route::pattern('year', '[1-2][0-9][0-9][0-9]');
 Route::pattern('month', '[1]?[0-9]');
 
-Route::get('/', array(
-    'as' => 'login',
-    'uses' => 'UserController@login'
+Route::get('/dashboard',array(
+	'as' => 'dashboard',
+	'uses' => 'UserController@getDashboard'
 ));
 
 Route::group(array('prefix' => 'allowance'), function() {
@@ -60,11 +60,36 @@ Route::group(array('prefix' => 'user'), function() {
     Route::get('edit', array('uses' => 'UserController@editPassword'));
 
     Route::post('edit', array('uses' => 'UserController@savePassword'));
+});
 
-    Route::post('/', array(
-        'as' => 'account-sign-in-post',
-        'uses' => 'UserController@postSignIn'
-    ));
+Route::group(array('before' => 'guest'), function(){
+	/*
+	CSRF protection group
+	*/
+	Route::group(array('before' => 'csrf'), function(){
+		/*
+		Sign in (POST)
+		*/
+		Route::post('/signIn', array(
+			'as' => 'account-sign-in-post',
+			'uses' => 'UserController@postSignIn'
+		));
+	});
+	
+	/*
+	Sign in (GET)
+	*/
+	Route::get('/', array(
+		'as' => 'login',
+		'uses' => 'UserController@login'
+	));
+});
+
+Route::group(array('before' => 'auth'), function(){
+	Route::get('/signOut',array(
+		'as' => 'account-sign-out',
+		'uses' => 'UserController@getSignOut'
+	));
 });
 
 Route::group(array('prefix' => 'converter'), function() {

@@ -50,17 +50,11 @@
                 </div>
                 <div class="login_content">
                     <form action="{{ URL::route('account-sign-in-post') }}" method="post">
-                        <input type="input" class="content_text_field" name="username" placeholder="Username" {{ (Input::old('username')) ? 'value="' . e(Input::old('username')) . '"' : '' }}/ style="display:block;">
-                               @if($errors->has('username'))
-                               {{ $errors->first('username') }}
-                               @endif
-                               <input type="password" class="content_text_field" name="password" placeholder="Password"/ style="display:block;">
-                               @if($errors->has('password'))
-                               {{ $errors->first('password') }}
-                               @endif
+                        <input type="input" class="content_text_field" name="username" placeholder="Username" required{{ (Input::old('username')) ? 'value="' . e(Input::old('username')) . '"' : '' }}/ style="display:block;">
+                               <input type="password" class="content_text_field" name="password" placeholder="Password" required / style="display:block;">
                                @if(Session::has('global'))
                                <p>{{ Session::get('global') }}</p>
-                        @endif
+								@endif
                         <div class="content_button">
                             <input type="submit" class="btn btn-primary-mod" value="Log In">
                         </div>

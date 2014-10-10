@@ -28,18 +28,20 @@
         <section class="wrapper">
             <section class="sidebar_nav_bar">
                 <ul>
-                    <li><a href="#" class="sidebar_brand">DASHBOARD</a></li>
+                    <li><a href="{{ URL::to('dashboard') }}" class="sidebar_brand">DASHBOARD</a></li>
                     <li><a href="{{ URL::to('allowance') }}">VIEW ALLOWANCE</a></li>
                     <li><a href="{{ URL::to('allowance/manage') }}">MANAGE ALLOWANCE</a></li>
                     <li><a href="{{ URL::to('user/manage') }}">MANAGE USER</a></li>
                     <li><a href="{{ URL::to('converter') }}">CONVERT DOCUMENT</a></li>
                     <li><a href="{{ URL::to('user/edit') }}">EDIT PROFILE</a></li>
+					<li><a href="{{ URL::route('account-sign-out') }}">LOG OUT</a></li>
                 </ul>
             </section>
 
             <section class="main_content_wrapper">
                 @yield('content')
             </section>
+			
         </section>
         {{ HTML::script('assets/js/jquery-1.11.1.min.js') }}
         {{ HTML::script('assets/js/modal.js') }}
