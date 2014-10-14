@@ -7,13 +7,13 @@ class AllowanceController extends BaseController {
     }
 
     public function view() {
-        $departments = Department::all();
+        $departments = Department::where('super_department_id', '=', "1")->get();
         return View::make('allowances.view', array('departments' => $departments));
     }
 
     public function viewTable($id, $year, $month) {
         $parameters = array('id' => intval($id), 'year' => intval($year), 'month' => intval($month));
-        $departments = Department::all();
+        $departments = Department::where('super_department_id', '=', "1")->get();
 
         $y = date('Y');
         $m = date('n');
@@ -81,12 +81,12 @@ class AllowanceController extends BaseController {
     }
 
     public function manage() {
-        $departments = Department::all();
+        $departments = Department::where('super_department_id', '=', "1")->get();
         return View::make('allowances.manage', array('departments' => $departments));
     }
 
     public function manageDepartment($id) {
-        $departments = Department::all();
+        $departments = Department::where('super_department_id', '=', "1")->get();
         $dept = Department::find($id);
         return View::make('allowances.manage', array('departments' => $departments, 'dept' => $dept));
     }

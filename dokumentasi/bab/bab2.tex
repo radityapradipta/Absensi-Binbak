@@ -1,26 +1,24 @@
 \section{Implementasi}
 
+\subsection{Basis Data}
+\begin{figure}[H]
+	\centering
+		\includegraphics[width=1.00\textwidth]{gambar/erd.png}
+	\caption{Diagram \textit{Entity Relationship}}
+	\label{fig:erd}
+\end{figure}
+
 \subsection{Lingkungan Pendukung}
 \begin{itemize}
 	\item \textit{Framework}
-\\Sistem informasi ini adalah sistem informasi berbasis web. Sistem informasi ini dibangun dengan \textit{framework} Laravel 4.2\footnote{http://laravel.com/docs/4.2/quick}. 
+\\Sistem informasi ini adalah sistem informasi berbasis web. Sistem informasi ini dibangun dengan \textit{framework} Laravel 4.2.\footnote{http://laravel.com/docs/4.2/quick} 
 	\item Basis Data
-\\Basis data yang digunakan selama proses pmbangunan sistem ini adalah MySql denagan dilengkapi antarmuka PhpMyAdmin.  
+\\Basis data yang digunakan selama proses pembangunan sistem ini adalah MySql. 
 	\item \textit{Web Server} 
-\\Contoh: Apache, NGINX
+\\Basis data yang digunakan selama proses pembangunan sistem ini adalah Apache.
 \end{itemize}
 
-\subsection{Petunjuk Instalasi}
-\begin{enumerate}
-	\item Buka MySql (boleh lewat antarmuka PhpMyAdmin), buat basis data dengan nama ``absensi-binbak''.
-	\item Pastikan basis data ``absensi-binbak'' masih kosong, jika belum maka hapus seluruh tabel yang ada di dalamnya.
-	\item Ubah \textit{username} dan \textit{password} untuk mengakses basis data MySql di ..\textbackslash xampp\textbackslash htdocs\textbackslash Absensi-Binbak\textbackslash app\textbackslash config\textbackslash database.php baris 59-60.
-	\item Buka \textit{command prompt}.
-	\item Ubah direktori \textit{command prompt} ke ..\textbackslash xampp\textbackslash htdocs\textbackslash Absensi-Binbak.
-	\item Pastikan bahwa direktori ``public'' dapat dibaca dan ditulis.
-	\item Ketik: \\\texttt{php artisan migrate}\\\texttt{php artisan db:seed}\\\texttt{php artisan serve}
-	\item Buka sistem informasi tersebut di \textit{browser} (http://localhost:8000/).
-\end{enumerate}
+\pagebreak
 
 
 

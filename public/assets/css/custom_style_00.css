@@ -207,13 +207,13 @@ html{
 	}
 	
 	.page_table>li:nth-child(even) {
-		background-color:#fff;
+		background-color:#fff !important;
 		list-style:none;
 	}
 	
 	
 	.page_table>li:nth-child(odd) {
-		background-color:#ebebeb;
+		background-color:#ebebeb !important;
 		list-style:none;
 	}
 

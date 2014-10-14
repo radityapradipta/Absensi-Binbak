@@ -84,9 +84,9 @@
 					<div class="grid_6">Username</div>
 					<div class="grid_2">Role</div>					
 					<div class="grid_1"></div>
-					<div class="grid_1"></div>
+					<div class="grid_1"></div>			
+					<br class="clear"/>
 				</li>
-				<br class="clear"/>
 				@foreach ($accounts as $account)	
 				<li class="container_12" data-id="{{ $account['id'] }}">
 					<div class="grid_2 ssn">{{ $account->employee->ssn }}</div>
@@ -94,8 +94,9 @@
 					<div class="grid_2 role">{{ $account->role->name }}</div>
 					<div class="grid_1"><a class="user-edit-button" href="#">Edit</a></div>
 					<div class="grid_1"><a class="user-delete-button" href="#">Delete</a></div>
+					<br class="clear"/>
 				</li>
-				<br class="clear"/>
+				
 				@endforeach 
 			</ul>
 

@@ -15,13 +15,12 @@ class CreateAbsencesTable extends Migration {
 		Schema::create('absences', function(Blueprint $table)
 		{			
 			// ---------- FIELD ----------
-			$table->integer('id')->unsigned();
+			$table->increments('id');
 			$table->date('start_date');
 			$table->date('end_date');
 			$table->string('reason',200)->nullable();	
 			
 			// ---------- KEY ----------
-			$table->primary('id');
 			$table->integer('employee_id');//foreign key utk join dgn employee
 			$table->integer('absence_category_id');//foreign key utk menentukan kategori dr ketidakhadiran tsb
 			

@@ -25,6 +25,7 @@ class CreateAccountsTable extends Migration {
 			$table->integer('role_id')->nullable();//foreign key utk join dgn employee
 			
 			// ---------- OPTION ----------
+			$table->unique('username');
 			$table->softDeletes();
 		});
 	}

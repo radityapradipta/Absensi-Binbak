@@ -1,20 +1,20 @@
 \section{Pendahuluan}
 
 \subsection{Deskripsi}
-Sistem Informasi Absensi Bina Bakti adalah sistem yang memiliki tugas utama mengolah data absensi untuk mendapatkan data nominal uang konsumsi. Data absensi tersebut didapat dari program lain dalam bentuk \textit{file} berekstensi ``.ndb'' dari Microsoft Access. Sistem akan membaca \textit{file} tersebut secara otomatis, kemudian mencatatnya di dalam basis data MySql. Data yang tersimpan dalam MySql tersebut akan digunakan untuk menghasilkan laporan bulanan mengenai nominal uang konsumsi yang dapat diterima oleh karyawan. Sistem ini juga akan menangani operasi-operasi lain yang juga berkaitan dengan hal tersebut.
+Sistem Informasi Absensi Bina Bakti adalah sistem yang memiliki tugas utama mengolah data absensi untuk mendapatkan data nominal uang konsumsi. Data absensi tersebut didapat dari program lain dalam bentuk \textit{file} berekstensi ``.mdb'' dari Microsoft Access. Sistem akan membaca \textit{file} tersebut secara otomatis, kemudian mencatatnya di dalam basis data MySql. Data yang tersimpan dalam MySql tersebut akan digunakan untuk menghasilkan laporan bulanan mengenai nominal uang konsumsi yang dapat diterima oleh karyawan. Sistem ini juga akan menangani operasi-operasi lain yang juga berkaitan dengan hal tersebut.
 
 \subsection{Fitur}
 \begin{itemize}
 	\item Autentikasi	(\textit{Log In})
 	\\Sistem informasi ini diberi fitur autentikasi agar setiap fitur hanya dapat diakses oleh pengguna yang berhak.
-	\item Perhitungan Uang Makan (\textit{View Allowance})
-	\\Sistem akan mengolah data uang makan untuk setiap karyawan sesuai dengan data kehadiran karyawan pada bulan tersebut. Fitur ini juga dapat diunduh sebagai \textit{file} berekstensi ``.csv'' dari Microsoft Excel.
-	\item Administrasi Nominal Uang Makan (\textit{Manage Allowance})
-	\\Sistem memungkinkan pengguna mengatur besarnya nominal uang makan. Nominal uang makan dibedakan menjadi tiga: nominal uang makan pada hari kerja, nominal uang makan pada akhir pekan, dan besarnya uang makan yang dipotong jika karyawan pulang awal (di atas jam 12).
+	\item Perhitungan Uang Konsumsi (\textit{View Allowance})
+	\\Sistem akan mengolah data uang konsumsi untuk setiap karyawan sesuai dengan data kehadiran karyawan pada bulan tersebut. Hasil perhitungan uang konsumsi tersebut dapat ditampilkan di website dan dapat pula diunduh sebagai \textit{file} berekstensi ``.csv'' dari Microsoft Excel.
+	\item Administrasi Nominal Uang Konsumsi (\textit{Manage Allowance})
+	\\Sistem memungkinkan pengguna mengatur besarnya nominal uang konsumsi. Nominal uang konsumsi dibedakan menjadi tiga: nominal uang konsumsi pada hari kerja, nominal uang konsumsi pada akhir pekan, dan besarnya uang konsumsi yang dipotong jika karyawan pulang awal (di atas jam 12).
 	\item Administrasi Pengguna (\textit{Manage User})
 	\\Sistem mencatat pengguna mana saja yang memiliki akses ke dalam sistem ini. Pengguna dikenali dengan \textit{username} dan \textit{password}. Pengguna memiliki hak akses yang berbeda-beda, tergantung dari perannya.
 	\item \textit{Convert Document}
-	\\Sistem akan membaca \textit{file} berekstensi ``.ndb'' dari Microsoft Access untuk mendapatkan data-data yang kemudian akan disimpan dalam basis data MySql.
+	\\Sistem akan membaca \textit{file} berekstensi ``.mdb'' dari Microsoft Access untuk mendapatkan data-data yang kemudian akan disimpan dalam basis data MySql.
 	\item Profil (\textit{Edit Profile})
 	\\Sistem memungkinkan pengguna untuk mencatat dan mengubah profilnya. Untuk sementara, pengguna baru dapat mengubah \textit{password}-nya.
 \end{itemize}
