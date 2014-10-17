@@ -34,7 +34,13 @@
                     <li><a href="{{ URL::to('user/manage') }}">MANAGE USER</a></li>
                     <li><a href="{{ URL::to('converter') }}">CONVERT DOCUMENT</a></li>
                     <li><a href="{{ URL::to('user/edit') }}">EDIT PROFILE</a></li>
-					<li><a href="{{ URL::route('account-sign-out') }}">LOG OUT</a></li>
+					<li>
+						<a href="{{ URL::route('account-sign-out') }}">
+							<span class="btn btn-primary-mod" style="width:100%; padding-top:10px; padding-left:0;">
+								LOG OUT &nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-log-out"></span>
+							</span>
+						</a>
+					</li>
                 </ul>
             </section>
 
