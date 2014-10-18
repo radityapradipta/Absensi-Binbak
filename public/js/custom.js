@@ -1,30 +1,30 @@
 var url = "http://localhost:8000/";
 
-$(document).ready(function () {
+$(document).ready(function() {
     $(".editor").hide();
     $(".alert").hide();
 
     //MENU VIEW ALLOWANCE
-    $("#allowance-button").click(function () {
+    $("#allowance-button").click(function() {
         var id = $("#allowance-department").val();
         var month = $("#allowance-month").val();
         var year = $("#allowance-year").val();
         window.location.replace(url + "allowance/view/department/" + id + "/year/" + year + "/month/" + month + "/");
     });
 
-    $("#allowance-download-button").click(function () {
+    $("#allowance-download-button").click(function() {
         var id = $("#allowance-department").val();
         var month = $("#allowance-month").val();
         var year = $("#allowance-year").val();
         window.location.replace(url + "allowance/download/department/" + id + "/year/" + year + "/month/" + month + "/");
     });
 
-    $("#allowance-select").change(function () {
+    $("#allowance-select").change(function() {
         var id = $("#allowance-select").val();
         window.location.replace(url + "allowance/manage/department/" + id + "/");
     });
 
-    $("#allowance-save").click(function () {
+    $("#allowance-save").click(function() {
         var param = {
             id: $("#dept-id").val(),
             weekday_nominal: $("#weekday_nominal").val(),
@@ -36,7 +36,7 @@ $(document).ready(function () {
             dataType: "json",
             url: url + "allowance/manage",
             data: param,
-            success: function (result) {
+            success: function(result) {
                 var message = $("#allowance-save-message");
                 if (result.valid) {
                     message.text('The allowance is successfully changed.');
@@ -47,7 +47,7 @@ $(document).ready(function () {
         });
     });
 
-    $(".user-edit-button").click(function () {
+    $(".user-edit-button").click(function() {
         var parent = $(this).closest("li");
         $("#edit-id").val(parent.data('id'));
         $("#edit-ssn").val(parent.children(".ssn").text());
@@ -55,7 +55,7 @@ $(document).ready(function () {
         $("#user-edit-modal").modal();
     });
 
-    $("#edit-password-toggle").click(function () {
+    $("#edit-password-toggle").click(function() {
         console.log("a" + $('#edit-password-toggle').attr('Checked'));
         if ($('#edit-password-toggle').is(":checked")) {
             $('#edit-password').show();
@@ -65,31 +65,31 @@ $(document).ready(function () {
     });
 
     //MENU MANAGE USER
-    $("#role-select").change(function () {
+    $("#role-select").change(function() {
         var id = $("#role-select").val();
         window.location.replace(url + "user/manage/role/" + id + "/");
     });
-    $("#user-add").submit(function (event) {
+    $("#user-add").submit(function(event) {
         event.preventDefault();
-        $.post(url + 'user/add', $(this).serializeArray(), function (result) {
+        $.post(url + 'user/add', $(this).serializeArray(), function(result) {
             location.reload(true);
         }, 'json');
     });
-    $("#user-update").submit(function (event) {
+    $("#user-update").submit(function(event) {
         event.preventDefault();
         $.ajax({
             type: 'PUT',
             url: url + 'user/update',
             dataType: "json",
             data: $(this).serializeArray(),
-            success: function (result) {
+            success: function(result) {
                 if (result.valid) {//berhasil
                     location.reload(true);
                 }
             }
         });
     });
-    $(".user-delete-button").click(function () {
+    $(".user-delete-button").click(function() {
         var parent = $(this).closest("li");
         var username = parent.find('.username').text();
         var c = confirm("Apakah Anda yakin menghapus " + username + "?");
@@ -99,7 +99,7 @@ $(document).ready(function () {
                 url: url + 'user/delete',
                 dataType: "json",
                 data: {id: parent.data('id')},
-                success: function (result) {
+                success: function(result) {
                     if (result.valid === 1) {//berhasil
                         parent.remove();
                     }
@@ -114,15 +114,15 @@ $(document).ready(function () {
         allowedTypes: 'mdb',
         fileName: 'file'
     });
-    $('#convert-button').click(function () {
-        $.post(url + 'converter/convert', function (data) {
+    $('#convert-button').click(function() {
+        $.post(url + 'converter/convert', function(data) {
             $('#loading').hide();
         });
         $('#loading').show();
     });
 
     //MENU EDIT PROFILE
-    $("#edit-profile").submit(function (event) {
+    $("#edit-profile").submit(function(event) {
         event.preventDefault();
         if ($("#new-password").val().localeCompare($("#confirm-password").val()) != 0) {
             message.text("The password does not match the confirmation.");
@@ -133,7 +133,7 @@ $(document).ready(function () {
                 'old-password': $("#old-password").val(),
                 'new-password': $("#new-password").val()
             };
-            $.post(url + "user/edit", param, function (data) {
+            $.post(url + "user/edit", param, function(data) {
                 if (data.valid) {
                     var message = $("#profile-edit-message");
                     message.text(data.message);
