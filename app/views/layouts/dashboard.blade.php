@@ -12,19 +12,7 @@
 </div>	
 
 <br class="clear"/><br/>
-<!--@if(Auth::check())-->
 <div class="page_title">
     Welcome, {{ ucfirst(Auth::user()->username) }} &nbsp;&nbsp;<span class="glyphicon glyphicon-thumbs-up"></span>
-</div><!--
-<div class="page_content">
-        <div class="page_content_solo">
-                        <p>Welcome, {{ ucfirst(Auth::user()->username) }}</p>
-        </div>
-</div>-->
-<!--	@else
-                <div class="page_content">
-                        <p>Please Login First!</p><br>
-                        <div><a href ="{{ URL::route('login') }}">Login</a></div>
-                </div>
-        @endif-->
+</div>
 @stop

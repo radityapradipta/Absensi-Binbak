@@ -5,7 +5,7 @@
     Convert Document
 </div>
 <!--@if(Auth::check())-->
-@if(Auth::user()->role_id == 1 || Auth::user()->role_id == 3)
+<!--@if(Auth::user()->role_id == 1 || Auth::user()->role_id == 3)-->
 <div class="page_content">
     <div class="page_content_solo">
         <div id="fileuploader">Upload File Access</div>
@@ -18,11 +18,11 @@
         <img id="loading" src="{{ asset('assets/img/LoadingCircle.gif') }}" style="display:none" />
     </div>
 </div>
-@else
+<!--@else
 <div class="page_content">
     <p>You don't have permission to convert document!</p><br>
 </div>
-@endif
+@endif-->
 <!--@else
         <div class="page_content">
                 <p>Please Login First!</p><br>

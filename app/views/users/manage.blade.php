@@ -5,7 +5,7 @@
     Manage User
 </div>
 <!--@if(Auth::check())-->
-@if(Auth::user()->role_id==1 || Auth::user()->role_id==3)
+<!--@if(Auth::user()->role_id==1 || Auth::user()->role_id==3)-->
 <div class="page_content">
     <div class="page_content_solo">
         <div class="content_head">
@@ -160,11 +160,11 @@
         </div>
     </div>
 </div>
-@else
+<!--@else
 <div class="page_content">
     <p>You don't have permission to manage user!</p><br>
 </div>
-@endif
+@endif-->
 <!--@else
         <div class="page_content">
                 <p>Please Login First!</p><br>

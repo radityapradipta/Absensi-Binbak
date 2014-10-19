@@ -12,7 +12,7 @@ class UserController extends BaseController {
 
 	public function getSignOut(){
 		Auth::logout();
-		return Redirect::route('login');
+		return Redirect::to('/');
 	}
 	
     public function postSignIn() {

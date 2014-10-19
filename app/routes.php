@@ -32,9 +32,16 @@ Route::group(array('before' => 'guest'), function() {
       Sign in (GET)
      */
     Route::get('/', array(
-        'as' => 'login',
         'uses' => 'UserController@login'
     ));
+});
+
+Route::get('/', function(){
+    if (Auth::check()) {
+        return View::make('layouts.dashboard');
+    } else {
+        return View::make('users.login');
+    }
 });
 
 Route::get('/dashboard', array(
@@ -44,8 +51,8 @@ Route::get('/dashboard', array(
 ));
 
 Route::group(array('before' => 'auth', 'prefix' => 'allowance'), function() {
+
     Route::get('/', array(
-        'as' => 'allowance',
         'uses' => 'AllowanceController@view'
     ));
 
@@ -57,10 +64,11 @@ Route::group(array('before' => 'auth', 'prefix' => 'allowance'), function() {
         'uses' => 'AllowanceController@downloadTable'
     ));
 
-    Route::get('manage', array(
-        'uses' => 'AllowanceController@manage'
-    ));
-
+	Route::get('manage', array(
+		'before' => 'roleManageAllowance',
+		'uses' => 'AllowanceController@manage'
+	));
+    
     Route::get('manage/department/{id}', array(
         'uses' => 'AllowanceController@manageDepartment'
     ));
@@ -71,7 +79,8 @@ Route::group(array('before' => 'auth', 'prefix' => 'allowance'), function() {
 });
 
 Route::group(array('before' => 'auth', 'prefix' => 'user'), function() {
-    Route::get('manage', array('uses' => 'UserController@manage'));
+
+    Route::get('manage', array('before' => 'roleManageUser','uses' => 'UserController@manage'));
 
     Route::get('manage/role/{id}', array('uses' => 'UserController@manageRole'));
 
@@ -87,7 +96,8 @@ Route::group(array('before' => 'auth', 'prefix' => 'user'), function() {
 });
 
 Route::group(array('before' => 'auth', 'prefix' => 'converter'), function() {
-    Route::get('/', array('uses' => 'ConverterController@index'));
+
+    Route::get('/', array('before' => 'roleConverter','uses' => 'ConverterController@index'));
 
     Route::post('upload', array('uses' => 'ConverterController@upload'));
 
@@ -99,3 +109,7 @@ Route::get('/signOut', array(
     'as' => 'account-sign-out',
     'uses' => 'UserController@getSignOut'
 ));
+
+Route::get('/forbidden', function(){
+	return View::make('layouts.forbidden');
+});
