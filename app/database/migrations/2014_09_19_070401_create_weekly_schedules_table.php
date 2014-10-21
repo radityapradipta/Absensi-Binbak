@@ -15,12 +15,12 @@ class CreateWeeklySchedulesTable extends Migration {
 		Schema::create('weekly_schedules', function(Blueprint $table)
 		{
 			// ---------- FIELD ----------
-			$table->integer('id')->unsigned();
+			$table->increments('id');
 			$table->tinyInteger('start_day')->unsigned();
 			$table->tinyInteger('end_day')->unsigned();
 			
 			// ---------- KEY ----------
-			$table->primary('id'); //(kolom NUM_RUNID)
+			//$table->primary('id'); //(kolom NUM_RUNID)
 			$table->integer('daily_schedule_id');//foreign key utk join dgn schedule sehari2 (wkt mulai & selesai)(kolom SCHCLASSID)
 			
 			// ---------- OPTION ----------			
