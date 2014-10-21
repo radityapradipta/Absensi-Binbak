@@ -11,16 +11,46 @@ class ScheduleSeeder extends Seeder {
 	{
 		DB::table('schedules')->delete();
 		
-		Schedule::create(array(
-			'id'			=> 1,		
-			'start_date'	=> '1900-01-01',
-			'end_date'		=> '2100-01-01'
+		Schedule::create(array(	
+			'start_date'			=> '1900-01-01',
+			'end_date'				=> '1999-01-01',
+			'employee_id'			=>	1, 
+			'weekly_schedule_id'	=>	2
 		));		
 
-		Schedule::create(array(
-			'id'			=> 2,		
-			'start_date'	=> '2000-01-01',
-			'end_date'		=> '2100-01-01'
+		Schedule::create(array(	
+			'start_date'			=> '1999-01-02',
+			'end_date'				=> '2100-01-01',
+			'employee_id'			=>	1, 
+			'weekly_schedule_id'	=>	1
+		));			
+		
+		Schedule::create(array(	
+			'start_date'			=> '1900-01-01',
+			'end_date'				=> '2100-01-01',
+			'employee_id'			=>	2, 
+			'weekly_schedule_id'	=>	1
+		));	
+
+		Schedule::create(array(	
+			'start_date'			=> '1900-01-01',
+			'end_date'				=> '2100-01-01',
+			'employee_id'			=>	3, 
+			'weekly_schedule_id'	=>	1
+		));			
+
+		Schedule::create(array(	
+			'start_date'			=> '1900-01-01',
+			'end_date'				=> '2100-01-01',
+			'employee_id'			=>	4, 
+			'weekly_schedule_id'	=>	2
+		));				
+		
+		Schedule::create(array(	
+			'start_date'			=> '1900-01-01',
+			'end_date'				=> '2100-01-01',
+			'employee_id'			=>	5, 
+			'weekly_schedule_id'	=>	2
 		));		
 	}
 

@@ -15,13 +15,14 @@ class CreateSchedulesTable extends Migration {
 		Schema::create('schedules', function(Blueprint $table)
 		{
 			// ---------- FIELD ----------
-			$table->integer('id')->unsigned();
+			$table->increments('id');
 			$table->date('start_date');
 			$table->date('end_date');
 			
 			// ---------- KEY ----------		
-			$table->primary('id');
-						
+			$table->integer('employee_id');//foreign key utk join dgn employee (kolom USERID)
+			$table->integer('weekly_schedule_id');//foreign key utk join dgn weekly_schedule (kolom NUM_OF_RUN_ID)
+			
 			// ---------- OPTION ----------			
 			$table->softDeletes();
 		});

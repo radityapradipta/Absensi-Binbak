@@ -3,17 +3,17 @@
 class Schedule extends Eloquent {
 
     protected $table = 'schedules';
-    protected $fillable = array('id', 'start_date', 'end_date');
+    protected $fillable = array('start_date', 'end_date', 'employee_id', 'weekly_schedule_id');
     public $timestamps = false;
 
     // ---------- RELATION ----------
 
-    public function employees() {
-        return $this->belongsToMany('Employee', 'employees_schedules', 'schedule_id', 'employee_id');
+    public function employee() {
+        return $this->belongsTo('Employee');
     }
 
-    public function weekly_schedules() {
-        return $this->hasMany('WeeklySchedule');
+    public function weekly_schedule() {
+        return $this->belongsTo('WeeklySchedule');
     }
 
 }

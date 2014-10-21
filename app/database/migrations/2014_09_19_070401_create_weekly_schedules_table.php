@@ -20,9 +20,8 @@ class CreateWeeklySchedulesTable extends Migration {
 			$table->tinyInteger('end_day')->unsigned();
 			
 			// ---------- KEY ----------
-			$table->primary('id');
-			$table->integer('schedule_id');//foreign key utk join dgn schedule
-			$table->integer('daily_schedule_id');//foreign key utk join dgn schedule sehari2 (wkt mulai & selesai)
+			$table->primary('id'); //(kolom NUM_RUNID)
+			$table->integer('daily_schedule_id');//foreign key utk join dgn schedule sehari2 (wkt mulai & selesai)(kolom SCHCLASSID)
 			
 			// ---------- OPTION ----------			
 			$table->softDeletes();

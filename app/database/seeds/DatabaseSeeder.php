@@ -24,8 +24,6 @@ class DatabaseSeeder extends Seeder {
 		$this->command->info('WeeklySchedule seeds finished.');		
 		$this->call('DailyScheduleSeeder');
 		$this->command->info('DailySchedule seeds finished.');
-		$this->call('EmployeeScheduleSeeder');
-		$this->command->info('EmployeeSchedule seeds finished.');
 		//$this->call('AutoCheckSeeder');
 		//$this->command->info('AutoCheck seeds finished.');		
 		//$this->call('ManualCheckSeeder');

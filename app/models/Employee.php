@@ -17,7 +17,7 @@ class Employee extends Eloquent {
     }
 
     public function schedules() {
-        return $this->belongsToMany('Schedule', 'employees_schedules', 'employee_id', 'schedule_id');
+        return $this->hasMany('Schedule');
     }
 
     public function absences() {
@@ -42,7 +42,7 @@ class Employee extends Eloquent {
 
         //ambil data jadwal		
         $schedule = array(); //array jadwal per hari dlm 1 minggu, indeks 1=senin .... 7=minggu
-        $weekly_schedules = $this->schedules()->orderBy('start_date', 'DESC')->first()->weekly_schedules()->get();
+        $weekly_schedules = $this->schedules()->orderBy('start_date', 'DESC')->first()->weekly_schedule()->get();
         foreach ($weekly_schedules as $ws) {
             $dailySchedule = $ws->dailySchedule()->first();
             for ($i = $ws['start_day']; $i <= $ws['end_day']; $i++) {
