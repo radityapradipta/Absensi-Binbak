@@ -15,7 +15,7 @@ class CreateWeeklySchedulesTable extends Migration {
 		Schema::create('weekly_schedules', function(Blueprint $table)
 		{
 			// ---------- FIELD ----------
-			$table->increments('id');
+			$table->integer('id')->unsigned();
 			$table->tinyInteger('start_day')->unsigned();
 			$table->tinyInteger('end_day')->unsigned();
 			
