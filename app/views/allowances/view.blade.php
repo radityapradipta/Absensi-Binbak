@@ -4,7 +4,6 @@
 <div class="page_title">
     View Allowance
 </div>
-<!--@if(Auth::check())-->
 <div class="page_content">	
 
     <div class="page_content_left">
@@ -221,10 +220,4 @@
 
     </div>
 </div>
-<!--@else
-<div class="page_content">
-    <p>Please Login First!</p><br>
-    <div><a href ="{{ URL::route('login') }}">Login</a></div>
-</div>
-@endif-->
 @stop

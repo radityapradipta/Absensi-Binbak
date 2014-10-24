@@ -4,8 +4,6 @@
 <div class="page_title">
     Manage Allowance
 </div>
-<!--@if(Auth::check())-->
-<!--@if(Auth::user()->role_id==1 || Auth::user()->role_id==3 || Auth::user()->role_id==4)-->
 <form>
     <div class="page_content">
         <div class="page_content_left">
@@ -73,15 +71,4 @@
         </div>
     </div>
 </form>
-<!--@else
-<div class="page_content">
-    <p>You don't have permission to manage allowance!</p><br>
-</div>
-@endif-->
-<!--@else
-        <div class="page_content">
-                <p>Please Login First!</p><br>
-                <div><a href ="{{ URL::route('login') }}">Login</a></div>
-        </div>
-@endif-->
 @stop

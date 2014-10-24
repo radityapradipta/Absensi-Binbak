@@ -23,48 +23,6 @@
     </head>
 
     <body>
-        <!--<section class="wrapper">
-            <section class="main_content_wrapper">
-                <div class="page_content">
-                    <div class="tableed">
-                        <div class="celled">
-                            <div class="rubirosa_logo_center">
-                                <span class="logo_center"></span>
-                            </div>
-                        </div>
-                    </div>	
-                </div>
-                <div class="page_title">
-                    <div class="tableed">
-                        <div class="celled">		
-                            <div class="page_content">
-                                <div class="head_logo">
-                                    <img src="{{ asset('assets/img/logo.png') }}">
-                                </div>
-
-                                <div class="head_title">
-                                    <h2>SISTEM INFORMASI ABSENSI BINA BAKTI</h2>
-                                </div>
-                            </div>
-                        </div>	
-                    </div>
-                </div>
-                <div class="login_content">
-                    <form action="{{ URL::route('account-sign-in-post') }}" method="post" class="container_12">
-                        <input type="input" class="content_text_field grid_4" name="username" placeholder="Username" required{{ (Input::old('username')) ? 'value="' . e(Input::old('username')) . '"' : '' }}/ style="display:block;">
-                               <input type="password" class="content_text_field" name="password" placeholder="Password" required / style="display:block;">
-                               @if(Session::has('global'))
-                               <p>{{ Session::get('global') }}</p>
-                                                                @endif
-                        <div class="content_button">
-                            <input type="submit" class="btn btn-primary-mod" value="Log In">
-                        </div>
-                        {{ Form::token() }}
-                    </form>
-                </div>
-            </section>
-        </section>-->
-
         <div class="container_12">
             <div class="grid_2">
                 &nbsp;

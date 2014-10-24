@@ -2,64 +2,28 @@
 
 class EmployeeSeeder extends Seeder {
 
-	/**
-	 * Run the database seeds.
-	 *
-	 * @return void
-	 */
-	public function run()
-	{
-		DB::table('employees')->delete();
-		
-		Employee::create(array(
-			'id'			=> 1,
-			'ssn'			=> 'BB1000',
-			'name'			=> 'ROSENTA',
-			'is_male'		=> FALSE,
-			'birthday'		=> strtotime("12/27/1977"),
-			'street'		=> 'Gg.MesjidBojong Pulus Banjara',
-			'department_id'	=> 1
-		));
-		
-		Employee::create(array(
-			'id'			=> 2,
-			'ssn'			=> 'BB1005',
-			'name'			=> 'BENJAMIN',
-			'is_male'		=> TRUE,
-			'birthday'		=> strtotime("4/14/1956"),
-			'street'		=> 'TKI I Q/31',
-			'department_id'	=> 1
-		));
-		
-		Employee::create(array(
-			'id'			=> 3,		
-			'ssn'			=> 'BB1007',
-			'name'			=> 'RIKEU R',
-			'is_male'		=> FALSE,
-			'birthday'		=> strtotime("8/5/1969"),
-			'street'		=> 'Kompl CempakaArum Blok D12/156',
-			'department_id'	=> 1
-		));
-		
-		Employee::create(array(
-			'id'			=> 4,		
-			'ssn'			=> 'BB1014',
-			'name'			=> 'RIRIS',
-			'is_male'		=> FALSE,
-			//'birthday'		=> strtotime("12/27/1977"), null
-			'street'		=> 'Jl.Topas Q4/18 Permata Cimahi',
-			'department_id'	=> 2
-		));
-		
-		Employee::create(array(
-			'id'			=> 5,		
-			'ssn'			=> 'BB0102',
-			'name'			=> 'RINDARTI',
-			'is_male'		=> FALSE,
-			'birthday'		=> strtotime("12/6/1963"),
-			'street'		=> 'Komp. Margahayu Raya P-15',
-			'department_id'	=> 2
-		));
-	}
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run() {
+        DB::table('employees')->delete();
+
+        $db = App::make('AccessDB');
+        $query = new Query('USERINFO', $db->get_dbh());
+        $result = $query->get('USERID,SSN,Name,Gender,BIRTHDAY,street,DEFAULTDEPTID');
+        foreach ($result as $row) {
+            Employee::create(array(
+                'id' => $row['USERID'],
+                'ssn' => $row['SSN'],
+                'name' => $row['Name'],
+                'is_male' => $row['Gender'] == 'Male' ? 1 : 0,
+                'birthday' => $row['BIRTHDAY'],
+                'street' => $row['street'],
+                'department_id' => $row['DEFAULTDEPTID']
+            ));
+        }
+    }
 
 }

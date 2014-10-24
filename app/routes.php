@@ -36,7 +36,7 @@ Route::group(array('before' => 'guest'), function() {
     ));
 });
 
-Route::get('/', function(){
+Route::get('/', function() {
     if (Auth::check()) {
         return View::make('layouts.dashboard');
     } else {
@@ -64,11 +64,11 @@ Route::group(array('before' => 'auth', 'prefix' => 'allowance'), function() {
         'uses' => 'AllowanceController@downloadTable'
     ));
 
-	Route::get('manage', array(
-		'before' => 'roleManageAllowance',
-		'uses' => 'AllowanceController@manage'
-	));
-    
+    Route::get('manage', array(
+        'before' => 'roleManageAllowance',
+        'uses' => 'AllowanceController@manage'
+    ));
+
     Route::get('manage/department/{id}', array(
         'uses' => 'AllowanceController@manageDepartment'
     ));
@@ -80,7 +80,7 @@ Route::group(array('before' => 'auth', 'prefix' => 'allowance'), function() {
 
 Route::group(array('before' => 'auth', 'prefix' => 'user'), function() {
 
-    Route::get('manage', array('before' => 'roleManageUser','uses' => 'UserController@manage'));
+    Route::get('manage', array('before' => 'roleManageUser', 'uses' => 'UserController@manage'));
 
     Route::get('manage/role/{id}', array('uses' => 'UserController@manageRole'));
 
@@ -97,7 +97,7 @@ Route::group(array('before' => 'auth', 'prefix' => 'user'), function() {
 
 Route::group(array('before' => 'auth', 'prefix' => 'converter'), function() {
 
-    Route::get('/', array('before' => 'roleConverter','uses' => 'ConverterController@index'));
+    Route::get('/', array('before' => 'roleConverter', 'uses' => 'ConverterController@index'));
 
     Route::post('upload', array('uses' => 'ConverterController@upload'));
 
@@ -110,6 +110,6 @@ Route::get('/signOut', array(
     'uses' => 'UserController@getSignOut'
 ));
 
-Route::get('/forbidden', function(){
-	return View::make('layouts.forbidden');
+Route::get('/forbidden', function() {
+    return View::make('layouts.forbidden');
 });

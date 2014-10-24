@@ -79,22 +79,22 @@ Route::filter('csrf', function() {
     }
 });
 
-Route::filter('roleManageUser', function(){
-	if(!(Auth::user()->role_id==1 || Auth::user()->role_id==3)){
-		return Redirect::to('/forbidden');
-	}
+Route::filter('roleManageUser', function() {
+    if (!(Auth::user()->role_id == 1 || Auth::user()->role_id == 3)) {
+        return Redirect::to('/forbidden');
+    }
 });
 
-Route::filter('roleManageAllowance',function(){
-	if(!(Auth::user()->role_id==1 || Auth::user()->role_id==3 || Auth::user()->role_id==4)){
-		return Redirect::to('/forbidden');
-	}
+Route::filter('roleManageAllowance', function() {
+    if (!(Auth::user()->role_id == 1 || Auth::user()->role_id == 3 || Auth::user()->role_id == 4)) {
+        return Redirect::to('/forbidden');
+    }
 });
 
-Route::filter('roleConverter', function(){
-	if(!(Auth::user()->role_id==1 || Auth::user()->role_id==3)){
-		return Redirect::to('/forbidden');
-	}
+Route::filter('roleConverter', function() {
+    if (!(Auth::user()->role_id == 1 || Auth::user()->role_id == 3)) {
+        return Redirect::to('/forbidden');
+    }
 });
 
 

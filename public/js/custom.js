@@ -116,6 +116,7 @@ $(document).ready(function() {
     });
     $('#convert-button').click(function() {
         $.post(url + 'converter/convert', function(data) {
+            console.log(data);
             $('#loading').hide();
         });
         $('#loading').show();

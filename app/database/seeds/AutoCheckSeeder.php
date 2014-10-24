@@ -2,51 +2,33 @@
 
 class AutoCheckSeeder extends Seeder {
 
-	/**
-	 * Run the database seeds.
-	 *
-	 * @return void
-	 */
-	public function run()
-	{
-		DB::table('auto_checks')->delete();
-		
-		AutoCheck::create(array(
-			'date_time'		=> '2014-09-22 06:55:00',		
-			'is_in'			=> TRUE,
-			'employee_id'	=> '1'
-		));		
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run() {
+        DB::table('auto_checks')->delete();
 
-		AutoCheck::create(array(
-			'date_time'		=> '2014-09-22 06:59:00',		
-			'is_in'			=> TRUE,
-			'employee_id'	=> '2'
-		));		
-
-		AutoCheck::create(array(
-			'date_time'		=> '2014-09-22 07:35:00',		
-			'is_in'			=> TRUE,
-			'employee_id'	=> '3'
-		));				
-
-		AutoCheck::create(array(
-			'date_time'		=> '2014-09-22 10:55:00',		
-			'is_in'			=> FALSE,
-			'employee_id'	=> '1'
-		));		
-
-		AutoCheck::create(array(
-			'date_time'		=> '2014-09-22 15:59:00',		
-			'is_in'			=> FALSE,
-			'employee_id'	=> '2'
-		));		
-
-		AutoCheck::create(array(
-			'date_time'		=> '2014-09-22 19:35:00',		
-			'is_in'			=> FALSE,
-			'employee_id'	=> '3'
-		));			
-		
-	}
+        $db = App::make('AccessDB');
+        $query = new Query('CHECKINOUT', $db->get_dbh());
+        $convert_file = public_path() . '\Last Convert.txt';
+        $record = explode(';', file_get_contents($convert_file));
+        $query->where('CHECKTIME', '>', $record[2]);
+        $query->limit(10000);
+        $query->order('CHECKTIME');
+        $result = $query->get('USERID,CHECKTIME,CHECKTYPE');
+        foreach ($result as $row) {
+            AutoCheck::create(array(
+                'date_time' => $row['CHECKTIME'],
+                'is_in' => ($row['CHECKTYPE'] == 'I' ? 1 : 0),
+                'employee_id' => $row['USERID']
+            ));
+        }
+        $record[2] = $result[count($result) - 1]['CHECKTIME'];
+        $file = fopen($convert_file, 'w');
+        fwrite($file, implode(';', $record));
+        fclose($file);
+    }
 
 }

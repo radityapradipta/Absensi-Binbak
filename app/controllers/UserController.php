@@ -10,29 +10,29 @@ class UserController extends BaseController {
         return View::make('users.login');
     }
 
-	public function getSignOut(){
-		Auth::logout();
-		return Redirect::to('/');
-	}
-	
+    public function getSignOut() {
+        Auth::logout();
+        return Redirect::to('/');
+    }
+
     public function postSignIn() {
-		$auth = Auth::attempt(array(
-					'username' => Input::get('username'),
-					'password' => Input::get('password')
-		));
-		if ($auth) {
-			Session::put('username', Input::get('username'));
-			return Redirect::intended('dashboard');
-		} else {
-			return Redirect::back()->with('global', 'Username/Password wrong');
-		}
+        $auth = Auth::attempt(array(
+                    'username' => Input::get('username'),
+                    'password' => Input::get('password')
+        ));
+        if ($auth) {
+            Session::put('username', Input::get('username'));
+            return Redirect::intended('dashboard');
+        } else {
+            return Redirect::back()->with('global', 'Username/Password wrong');
+        }
         return Redirect::back()->with('global', 'There was a problem signing you in.');
     }
-	
-	public function getDashboard(){
-		return View::make('layouts.dashboard');
-	}
-	
+
+    public function getDashboard() {
+        return View::make('layouts.dashboard');
+    }
+
     public function manage() {
         $roles = Role::all();
         return View::make('users.manage', array('roles' => $roles));

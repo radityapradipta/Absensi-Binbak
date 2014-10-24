@@ -2,29 +2,25 @@
 
 class DailyScheduleSeeder extends Seeder {
 
-	/**
-	 * Run the database seeds.
-	 *
-	 * @return void
-	 */
-	public function run()
-	{
-		DB::table('daily_schedules')->delete();
-		
-		DailySchedule::create(array(
-			'id'		=> 1,		
-			'name'		=> 'pagi',
-			'start_time'=> '07:00:00',
-			'end_time'	=> '12:00:00'
-		));		
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run() {
+        DB::table('daily_schedules')->delete();
 
-		DailySchedule::create(array(
-			'id'		=> 2,		
-			'name'		=> 'siang',
-			'start_time'=> '09:00:00',
-			'end_time'	=> '14:00:00'
-		));		
-			
-	}
+        $db = App::make('AccessDB');
+        $query = new Query('SCHCLASS', $db->get_dbh());
+        $result = $query->get('SCHCLASSID,SCHNAME,STARTTIME,ENDTIME');
+        foreach ($result as $row) {
+            DailySchedule::create(array(
+                'id' => $row['SCHCLASSID'],
+                'name' => $row['SCHNAME'],
+                'start_time' => $row['STARTTIME'],
+                'end_time' => $row['ENDTIME']
+            ));
+        }
+    }
 
 }
