@@ -5,40 +5,36 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateDepartmentsTable extends Migration {
 
-	/**
-	 * Run the migrations.
-	 *
-	 * @return void
-	 */
-	public function up()
-	{
-		Schema::create('departments', function(Blueprint $table)
-		{
-			// ---------- FIELD ----------
-			$table->integer('id')->unsigned();
-			$table->string('name', 30);
-			$table->integer('weekday_nominal');
-			$table->integer('weekend_nominal');
-			$table->integer('cut_nominal');
-			
-			// ---------- KEY ----------
-			$table->primary('id');
-			$table->integer('super_department_id')->nullable();//foreign key utk menunjuk parent departementnya
-			$table->integer('allowance_id');//foreign key utk menunjuk nominal uang konsumsi
-			
-			// ---------- OPTION ----------
-			$table->softDeletes();
-		});
-	}
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up() {
+        Schema::create('departments', function(Blueprint $table) {
+            // ---------- FIELD ----------
+            $table->integer('id')->unsigned();
+            $table->string('name', 30);
+            $table->integer('weekday_nominal');
+            $table->integer('weekend_nominal');
+            $table->integer('cut_nominal');
 
-	/**
-	 * Reverse the migrations.
-	 *
-	 * @return void
-	 */
-	public function down()
-	{
-		Schema::drop('departments');
-	}
+            // ---------- KEY ----------
+            $table->primary('id');
+            $table->integer('super_department_id')->nullable(); //foreign key utk menunjuk parent departementnya
+//            $table->integer('allowance_id'); //foreign key utk menunjuk nominal uang konsumsi
+            // ---------- OPTION ----------
+            $table->softDeletes();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down() {
+        Schema::drop('departments');
+    }
 
 }

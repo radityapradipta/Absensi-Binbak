@@ -17,8 +17,10 @@ class DepartmentSeeder extends Seeder {
             Department::create(array(
                 'id' => $row['DEPTID'],
                 'name' => $row['DEPTNAME'],
-                'super_department_id' => $row['SUPDEPTID'],
-                'allowance_id' => 1
+                'weekday_nominal' => 20000,
+                'weekend_nominal' => 5000,
+                'cut_nominal' => 5000,
+                'super_department_id' => $row['SUPDEPTID']
             ));
         }
     }

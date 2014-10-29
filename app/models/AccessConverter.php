@@ -4,6 +4,7 @@ class AccessConverter {
 
     private $dbh;
     private $last_convert_file = '\Last Convert.txt';
+    private $num_data;
 
     public function __construct() {
         $this->dbh = App::make('AccessDB')->get_dbh();
@@ -11,11 +12,13 @@ class AccessConverter {
 
     public function convert() {
         set_time_limit(90);
+        $this->num_data = 0;
         $starts = $this->readFile();
         $starts[0] = $this->user_speday($starts[0]);
         $starts[1] = $this->check_exact($starts[1]);
         $starts[2] = $this->check_inout($starts[2]);
         $this->updateFile($starts);
+        return $this->num_data;
     }
 
     public function readFile() {
@@ -40,7 +43,9 @@ class AccessConverter {
                 'employee_id' => $row['USERID']
             ));
         }
-        return $result[count($result) - 1]['EXACTID'];
+        $size = count($result);
+        $this->num_data += $size;
+        return $result[$size - 1]['EXACTID'];
     }
 
     public function check_inout($start) {
@@ -55,7 +60,9 @@ class AccessConverter {
                 'employee_id' => $row['USERID']
             ));
         }
-        return $result[count($result) - 1]['CHECKTIME'];
+        $size = count($result);
+        $this->num_data += $size;
+        return $result[$size - 1]['CHECKTIME'];
     }
 
     public function user_speday($start) {
@@ -72,7 +79,9 @@ class AccessConverter {
                 'absence_category_id' => $row['DATEID']
             ));
         }
-        return $result[count($result) - 1]['DATE'];
+        $size = count($result);
+        $this->num_data += $size;
+        return $result[$size - 1]['DATE'];
     }
 
 }

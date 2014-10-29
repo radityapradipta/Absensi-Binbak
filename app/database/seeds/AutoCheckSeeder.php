@@ -10,12 +10,10 @@ class AutoCheckSeeder extends Seeder {
     public function run() {
         DB::table('auto_checks')->delete();
 
+        set_time_limit(300);
         $db = App::make('AccessDB');
         $query = new Query('CHECKINOUT', $db->get_dbh());
-        $convert_file = public_path() . '\Last Convert.txt';
-        $record = explode(';', file_get_contents($convert_file));
-        $query->where('CHECKTIME', '>', $record[2]);
-        $query->limit(10000);
+        $query->where('CHECKTIME', '>=', '2014-07-01');
         $query->order('CHECKTIME');
         $result = $query->get('USERID,CHECKTIME,CHECKTYPE');
         foreach ($result as $row) {
@@ -25,6 +23,8 @@ class AutoCheckSeeder extends Seeder {
                 'employee_id' => $row['USERID']
             ));
         }
+        $convert_file = public_path() . '\Last Convert.txt';
+        $record = explode(';', file_get_contents($convert_file));
         $record[2] = $result[count($result) - 1]['CHECKTIME'];
         $file = fopen($convert_file, 'w');
         fwrite($file, implode(';', $record));

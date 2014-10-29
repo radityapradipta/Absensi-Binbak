@@ -12,6 +12,7 @@ class AbsenceSeeder extends Seeder {
 
         $db = App::make('AccessDB');
         $query = new Query('USER_SPEDAY', $db->get_dbh());
+        $query->where('DATE', '>=', '2014-07-01');
         $query->order('DATE');
         $result = $query->get();
         foreach ($result as $row) {

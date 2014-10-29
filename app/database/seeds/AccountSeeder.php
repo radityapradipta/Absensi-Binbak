@@ -12,11 +12,10 @@ class AccountSeeder extends Seeder {
 
         Account::create(array(
             'username' => 'admin',
-            'password' => Hash::make('admin'),
-            'employee_id' => 1,
+            'password' => Hash::make('binabakti'),
+            'employee_id' => 31,
             'role_id' => 1
         ));
-
     }
 
 }

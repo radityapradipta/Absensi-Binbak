@@ -12,6 +12,7 @@ class ManualCheckSeeder extends Seeder {
 
         $db = App::make('AccessDB');
         $query = new Query('CHECKEXACT', $db->get_dbh());
+        $query->where('EXACTID', '>=', 1455);
         $query->order('EXACTID');
         $result = $query->get('EXACTID,USERID,CHECKTIME,CHECKTYPE');
         foreach ($result as $row) {

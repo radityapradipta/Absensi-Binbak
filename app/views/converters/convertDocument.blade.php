@@ -14,6 +14,7 @@
 
     <div class="page_content_under">
         <img id="loading" src="{{ asset('assets/img/LoadingCircle.gif') }}" style="display:none" />
+        <!--<span class="alert alert-danger" role="alert" style=""></span>-->
     </div>
 </div>
 @stop

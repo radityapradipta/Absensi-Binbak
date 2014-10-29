@@ -116,8 +116,8 @@ $(document).ready(function() {
     });
     $('#convert-button').click(function() {
         $.post(url + 'converter/convert', function(data) {
-            console.log(data);
             $('#loading').hide();
+            $('<p/>').text(data).appendTo('.page_content_under');
         });
         $('#loading').show();
     });
