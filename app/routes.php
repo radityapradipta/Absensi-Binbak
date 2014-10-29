@@ -37,6 +37,7 @@ Route::group(array('before' => 'guest'), function() {
 });
 
 Route::get('/', function() {
+	File::put(public_path() . "/js/url.js", "var url=\"".url()."/\"; ");//tulis url ke file, file tsb digunakan utk komunikasi dgn js 
     if (Auth::check()) {
         return View::make('layouts.dashboard');
     } else {

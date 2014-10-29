@@ -93,8 +93,11 @@ class AllowanceController extends BaseController {
 
     public function applyChange() {
         $param = Input::all();
-        $allowance = Department::find($param['id'])->allowance()->first();
-        $allowance->edit($param);
+        $department = Department::find($param['id']);
+		$department->weekday_nominal=$param['weekday_nominal'];
+		$department->weekend_nominal=$param['weekend_nominal'];
+		$department->cut_nominal=$param['cut_nominal'];
+		$department->save();
         return Response::json(array('valid' => TRUE));
     }
 

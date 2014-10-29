@@ -39,7 +39,7 @@
             </div>
 
             <div class="content_field">
-                <input type="input" class="content_text_field" value="{{ $dept->allowance->weekday_nominal }}" id="weekday_nominal">
+                <input type="input" class="content_text_field" value="{{ $dept->weekday_nominal }}" id="weekday_nominal">
             </div>	
             <!---------------- Da Text Field -------------------->
 
@@ -49,7 +49,7 @@
             </div>
 
             <div class="content_field">
-                <input type="input" class="content_text_field" value="{{ $dept->allowance->weekend_nominal }}" id="weekend_nominal">
+                <input type="input" class="content_text_field" value="{{ $dept->weekend_nominal }}" id="weekend_nominal">
             </div>	
             <!---------------- Da Text Field -------------------->
 
@@ -59,7 +59,7 @@
             </div>
 
             <div class="content_field">
-                <input type="input" class="content_text_field" value="{{ $dept->allowance->cut_nominal }}" id="cut_nominal">
+                <input type="input" class="content_text_field" value="{{ $dept->cut_nominal }}" id="cut_nominal">
             </div>	
             <!---------------- Da Text Field -------------------->
 
