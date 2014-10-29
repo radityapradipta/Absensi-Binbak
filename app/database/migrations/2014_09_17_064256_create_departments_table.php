@@ -17,6 +17,9 @@ class CreateDepartmentsTable extends Migration {
 			// ---------- FIELD ----------
 			$table->integer('id')->unsigned();
 			$table->string('name', 30);
+			$table->integer('weekday_nominal');
+			$table->integer('weekend_nominal');
+			$table->integer('cut_nominal');
 			
 			// ---------- KEY ----------
 			$table->primary('id');

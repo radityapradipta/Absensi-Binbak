@@ -13,12 +13,12 @@ class DatabaseSeeder extends Seeder {
         $this->command->info('AbsenceCategory seeds finished.');
         $this->call('AccountSeeder');
         $this->command->info('Account seeds finished.');
-        $this->call('AllowanceSeeder');
-        $this->command->info('Allowance seeds finished.');
         $this->call('RoleSeeder');
         $this->command->info('Role seeds finished.');
-
-        $this->call('DailyScheduleSeeder');
+		$this->call('HolidaySeeder');
+        $this->command->info('Holiday seeds finished.');
+		
+        /*$this->call('DailyScheduleSeeder');
         $this->command->info('DailySchedule seeds finished.');
         $this->call('DepartmentSeeder');
         $this->command->info('Department seeds finished.');
@@ -33,7 +33,9 @@ class DatabaseSeeder extends Seeder {
         $this->call('AutoCheckSeeder');
         $this->command->info('AutoCheck seeds finished.');		
         $this->call('ManualCheckSeeder');
-        $this->command->info('ManualCheck seeds finished.');	
+        $this->command->info('ManualCheck seeds finished.');	*/
+		
+		
     }
 
 }

@@ -3,7 +3,7 @@
 class Department extends Eloquent {
 
     protected $table = 'departments';
-    protected $fillable = array('id', 'name', 'super_department_id');
+    protected $fillable = array('id', 'name', 'super_department_id','weekday_nominal','weekend_nominal','cut_nominal');
     public $timestamps = false;
 
     // ---------- RELATION ----------
@@ -14,10 +14,6 @@ class Department extends Eloquent {
 
     public function superDepartment() {
         return $this->belongsTo('Department');
-    }
-
-    public function allowance() {
-        return $this->belongsTo('Allowance');
     }
 
 }
