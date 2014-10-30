@@ -53,7 +53,7 @@
         {{ HTML::script('assets/js/modal.js') }}
         {{ HTML::script('assets/js/jquery.form.js') }}
         {{ HTML::script('assets/js/jquery.uploadfile.min.js') }}
-		{{ HTML::script('js/url.js') }}
+        {{ HTML::script('js/url.js') }}
         {{ HTML::script('js/custom.js') }}
     </body>
 </html>	

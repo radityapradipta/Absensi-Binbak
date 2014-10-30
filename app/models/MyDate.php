@@ -53,14 +53,15 @@ class MyDate {
     public static function get_month_names() {
         return array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December');
     }
-	
-    public static function is_holiday($date) {		
-		$holiday = Holiday::where('start', '<=', "$date")->orderBy('start', 'DESC')->first();		
-		$difference = (strtotime($date)-strtotime($holiday->start))/(60*60*24);        
-		if($difference < $holiday->duration){
-			return 1;
-		}else{
-			return 0;
-		}
+
+    public static function is_holiday($date) {
+        $holiday = Holiday::where('start', '<=', "$date")->orderBy('start', 'DESC')->first();
+        $difference = (strtotime($date) - strtotime($holiday->start)) / (60 * 60 * 24);
+        if ($difference < $holiday->duration) {
+            return 1;
+        } else {
+            return 0;
+        }
     }
+
 }

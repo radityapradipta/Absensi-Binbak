@@ -7,5 +7,4 @@ class Holiday extends Eloquent {
     public $timestamps = false;
 
     // ---------- RELATION ----------
-
 }

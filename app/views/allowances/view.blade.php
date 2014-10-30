@@ -35,7 +35,7 @@
 
         <div class="content_field">            
             <select class="content_dropDown" id="allowance-department">
-                @foreach ($departments as $department)	
+                @foreach ($departments as $department)
                 @if(isset($parameters['id']) && $department['id']==$parameters['id'])
                 <option value="{{ $department['id'] }}" selected>{{ $department['name'] }}</option>
                 @else
@@ -60,7 +60,7 @@
 
         <div class="content_field">
             <select class="content_dropDown" id="allowance-year"/>
-            @for($i=date('Y'); $i>=1990; $i--)	
+            @for($i=date('Y'); $i>=2011; $i--)	
             @if(isset($parameters['year']) && $i==$parameters['year'])
             <option value="{{ $i }}" selected>{{ $i }}</option>
             @else

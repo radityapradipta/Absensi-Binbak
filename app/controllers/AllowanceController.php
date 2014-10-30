@@ -2,27 +2,28 @@
 
 class AllowanceController extends BaseController {
 
+    private $departments;
+
     public function __construct() {
-        
+        $dept_id = Department::distinct()->lists('super_department_id');
+        $this->departments = Department::whereNotIn('id', $dept_id)->where('name', 'NOT LIKE', '%HONORER%')->get();
     }
 
     public function view() {
-        $departments = Department::where('super_department_id', '=', "1")->get();
-        return View::make('allowances.view', array('departments' => $departments));
+        return View::make('allowances.view', array('departments' => $this->departments));
     }
 
     public function viewTable($id, $year, $month) {
         $parameters = array('id' => intval($id), 'year' => intval($year), 'month' => intval($month));
-        $departments = Department::where('super_department_id', '=', "1")->get();
 
         $y = date('Y');
         $m = date('n');
         if ($year > $y || ($year == $y && $month > $m)) {
-            return View::make('allowances.view', array('valid' => FALSE, 'departments' => $departments, 'parameters' => $parameters)); //data hanya tersedia utk bulan/tahun yg lewat
+            return View::make('allowances.view', array('valid' => FALSE, 'departments' => $this->departments, 'parameters' => $parameters)); //data hanya tersedia utk bulan/tahun yg lewat
         }
 
         $employees = Employee::where('department_id', '=', "$id")->get();
-        return View::make('allowances.view', array('valid' => TRUE, 'departments' => $departments, 'employees' => $employees, 'parameters' => $parameters));
+        return View::make('allowances.view', array('valid' => TRUE, 'departments' => $this->departments, 'employees' => $employees, 'parameters' => $parameters));
     }
 
     public function downloadTable($id, $year, $month) {
@@ -38,7 +39,7 @@ class AllowanceController extends BaseController {
         $contents.="KODE ,NAMA , NORMAL, ,PULANG AWAL, , ,TERLAMBAT ,LUPA ,TUGAS LUAR ,OTHER ,TIDAK MASUK , , ,JUMLAH HARI MASUK, ,JUMLAH HARI TIDAK MASUK ,NOMINAL UANG KONSUMSI \n";
         $contents.=" , ,WEEKDAY ,WEEKEND ,WEEKDAY < 12 ,WEEKDAY >= 12 ,WEEKEND, , , , ,SAKIT ,IZIN ,ALPHA ,WEEKDAY ,WEEKEND , ,WEEKDAY ,WEEKEND ,PULANG AWAL , TOTAL \n";
 
-        $employees = Employee::where('department_id', '=', "$id")->get();
+        $employees = Employee::where('department_id', '=', $id)->get();
         $total = 0;
         foreach ($employees as $employee) {
             $contents.=$employee->ssn . ",";
@@ -71,7 +72,7 @@ class AllowanceController extends BaseController {
         }
         $contents.=",,,,,,,,,,,,,,,,,,,," . $total;
 
-        $file_name = "allowance.csv";
+//        $file_name = "allowance.csv";
         $file = public_path() . "/download/allowance.csv";
         File::put($file, $contents);
         return Response::download($file, ("allowance-" . strtolower($department->name) . "-" . $month . "-" . $year . ".csv"), array(
@@ -81,23 +82,18 @@ class AllowanceController extends BaseController {
     }
 
     public function manage() {
-        $departments = Department::where('super_department_id', '=', "1")->get();
-        return View::make('allowances.manage', array('departments' => $departments));
+        return View::make('allowances.manage', array('departments' => $this->departments));
     }
 
     public function manageDepartment($id) {
-        $departments = Department::where('super_department_id', '=', "1")->get();
         $dept = Department::find($id);
-        return View::make('allowances.manage', array('departments' => $departments, 'dept' => $dept));
+        return View::make('allowances.manage', array('departments' => $this->departments, 'dept' => $dept));
     }
 
     public function applyChange() {
         $param = Input::all();
         $department = Department::find($param['id']);
-		$department->weekday_nominal=$param['weekday_nominal'];
-		$department->weekend_nominal=$param['weekend_nominal'];
-		$department->cut_nominal=$param['cut_nominal'];
-		$department->save();
+        $department->edit($param);
         return Response::json(array('valid' => TRUE));
     }
 
