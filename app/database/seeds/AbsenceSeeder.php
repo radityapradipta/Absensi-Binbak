@@ -12,8 +12,8 @@ class AbsenceSeeder extends Seeder {
 
         $db = App::make('AccessDB');
         $query = new Query('USER_SPEDAY', $db->get_dbh());
-        $query->where('DATE', '>=', '2014-07-01');
-        $query->order('DATE');
+        $query->where('STARTSPECDAY', '>=', '2014-07-01');
+        $query->order('STARTSPECDAY');
         $result = $query->get();
         foreach ($result as $row) {
             Absence::create(array(
@@ -26,7 +26,7 @@ class AbsenceSeeder extends Seeder {
         }
         $convert_file = public_path() . '\Last Convert.txt';
         $record = explode(';', file_get_contents($convert_file));
-        $record[0] = $result[count($result) - 1]['DATE'];
+        $record[0] = $result[count($result) - 1]['STARTSPECDAY'];
         $file = fopen($convert_file, 'w');
         fwrite($file, implode(';', $record));
         fclose($file);

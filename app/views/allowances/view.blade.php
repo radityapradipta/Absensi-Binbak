@@ -175,7 +175,7 @@
             <tr class="allowance-row">
                 <td class="thin-border">{{ $employee->ssn or '-' }}</td>
                 <td class="thick-border">{{ $employee->name or '-' }}</td>
-                <!--<td>{{ $employee->department->name or '-' }}</td>-->
+<!--                <td>{{ $employee->department->name or '-' }}</td>-->
                 <?php
                 $data = $employee->get_absence_data($parameters['month'], $parameters['year']);
                 $total+=$data['konsumsi_total'];

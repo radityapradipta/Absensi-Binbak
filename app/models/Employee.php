@@ -57,27 +57,16 @@ class Employee extends Eloquent {
             'konsumsi_pulang_awal' => 0,
             'konsumsi_total' => 0
         );
-        try {
+        if (!is_null($this->schedules()->first())) {
             //tentukan range waktu (awal bulan-akhir bulan)
             $end_day = MyDate::get_number_of_day($month, $year);
             $start_time = strtotime("$year-$month-01 00:00:00");
             $end_time = strtotime("$year-$month-$end_day 00:00:00");
 
-            //ambil data jadwal		
-            $schedule = array(); //array jadwal per hari dlm 1 minggu, indeks 1=senin .... 7=minggu
-            $weekly_schedules = $this->schedules()->orderBy('start_date', 'DESC')->first()->weekly_schedule()->get();
-            foreach ($weekly_schedules as $ws) {
-                $dailySchedule = $ws->dailySchedule()->first();
-                for ($i = $ws['start_day']; $i <= $ws['end_day']; $i++) {
-                    if ($i == 7) {
-                        $schedule[0] = $dailySchedule; //di php, hari minggu indeks ke-0, bukan ke-7
-                    } else {
-                        $schedule[$i] = $dailySchedule;
-                    }
-                }
-            }
+            //ambil data jadwal	
+            $schedule = $this->getSchedule();
 
-            //ambil data uang konsumsi	
+            //ambil data uang konsumsi
             $department = $this->department()->first();
             $allowance = array('weekday' => $department->weekday_nominal, 'weekend' => $department->weekend_nominal, 'pulang_awal' => ($department->weekday_nominal - $department->cut_nominal));
 
@@ -92,33 +81,11 @@ class Employee extends Eloquent {
                     $in = null;
                     $out = null;
 
-                    // --- memperhitungkan perbedaan check in & check out
-                    /*
-                      $in = $this->autoChecks()->where('date_time', '>=', "$current_date_start")->where('date_time', '<=', "$current_date_end")->where('is_in', '=', TRUE)->first();
-                      if (is_null($in)) {//jk tdk ada di yg auto, check yg manual
-                      $in = $this->manualChecks()->where('date_time', '>=', "$current_date_start")->where('date_time', '<=', "$current_date_end")->where('is_in', '=', TRUE)->first();
-                      }
-                      $out = $this->autoChecks()->where('date_time', '>=', "$current_date_start")->where('date_time', '<=', "$current_date_end")->where('is_in', '=', FALSE)->first();
-                      if (is_null($out)) {//jk tdk ada di yg auto, check yg manual
-                      $out = $this->manualChecks()->where('date_time', '>=', "$current_date_start")->where('date_time', '<=', "$current_date_end")->where('is_in', '=', FALSE)->first();
-                      }
-                     */
-                    // --- selesai
                     // --- tanpa memperhitungkan perbedaan check in & check out
                     $auto = $this->autoChecks()->whereBetween('date_time', array($current_date_start, $current_date_end))->orderBy('date_time')->get();
 
                     count($auto) > 0 ? $in = $auto[0] : $in = $this->manualChecks()->whereBetween('date_time', array($current_date_start, $current_date_end))->orderBy('date_time')->first();
-                    count($auto) >= 2 ? $out = $auto[1] : $out = $this->manualChecks()->whereBetween('date_time', array($current_date_start, $current_date_end))->orderBy('date_time', 'DESC')->first();
-//                    $in = $this->autoChecks()->where('date_time', '>=', "$current_date_start")->where('date_time', '<=', "$current_date_end")->orderBy('date_time', 'ASC')->first();
-//                    if (is_null($in)) {//jk tdk ada di yg auto, check yg manual    
-//                        $in = $this->manualChecks()->where('date_time', '>=', "$current_date_start")->where('date_time', '<=', "$current_date_end")->orderBy('date_time', 'ASC')->first();
-//                    }
-//                    if (!is_null($in)) {//cek sekali lagi apakah in sdh terisi
-//                        $out = $this->autoChecks()->where('date_time', '>', $in['date_time'])->where('date_time', '<=', "$current_date_end")->orderBy('date_time', 'DESC')->first();
-//                        if (is_null($out)) {//jk tdk ada di yg auto, check yg manual
-//                            $out = $this->manualChecks()->where('date_time', '>', $in['date_time'])->where('date_time', '<=', "$current_date_end")->orderBy('date_time', 'DESC')->first();
-//                        }
-//                    }
+                    count($auto) >= 2 ? $out = $auto[count($auto) - 1] : $out = $this->manualChecks()->whereBetween('date_time', array($current_date_start, $current_date_end))->orderBy('date_time', 'DESC')->first();
                     // --- selesai
 
                     if (is_null($in) xor is_null($out)) {//lupa salah satu dari absen masuk/keluar					
@@ -152,7 +119,7 @@ class Employee extends Eloquent {
 
                     //periksa attendance
                     $absence = $this->absences()->where('start_date', '<=', $current_date_start)->where('end_date', '>=', $current_date_start)->first();
-                    if (!is_null($absence)) {
+                    if (!is_null($absence)) { 
                         $category_id = $absence['absence_category_id'];
                         switch ($category_id) {
                             case 3:
@@ -191,11 +158,23 @@ class Employee extends Eloquent {
             $data['konsumsi_weekend'] = $allowance['weekend'] * $data['normal_weekend'];
             $data['konsumsi_pulang_awal'] = $allowance['pulang_awal'] * $data['pulang_awal_weekday'];
             $data['konsumsi_total'] = $data['konsumsi_weekday'] + $data['konsumsi_weekend'] + $data['konsumsi_pulang_awal'];
-
-            return $data;
-        } catch (Exception $exception) {
-            return $data;
         }
+        Session::put($this->id, $data);
+        return $data;
+    }
+
+    public function getSchedule() {
+        $schedule = array(); //array jadwal per hari dlm 1 minggu, indeks 1=senin .... 7=minggu
+        $weekly_schedules = $this->schedules()->orderBy('start_date', 'DESC')->first()->weekly_schedule()->get();
+        foreach ($weekly_schedules as $ws) {
+            $dailySchedule = $ws->dailySchedule()->first();
+            $i = $ws['start_day'];
+            if ($i == 7) {
+                $i = 0;
+            }
+            $schedule[$i] = $dailySchedule;
+        }
+        return $schedule;
     }
 
 }

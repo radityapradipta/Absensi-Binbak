@@ -11,7 +11,7 @@ class AccessConverter {
     }
 
     public function convert() {
-        set_time_limit(90);
+        set_time_limit(0);
         $this->num_data = 0;
         $starts = $this->readFile();
         $starts[0] = $this->user_speday($starts[0]);
@@ -67,8 +67,8 @@ class AccessConverter {
 
     public function user_speday($start) {
         $query = new Query('USER_SPEDAY', $this->dbh);
-        $query->where('DATE', '>', $start);
-        $query->order('DATE');
+        $query->where('STARTSPECDAY', '>', $start);
+        $query->order('STARTSPECDAY');
         $result = $query->get();
         foreach ($result as $row) {
             Absence::create(array(
@@ -81,7 +81,7 @@ class AccessConverter {
         }
         $size = count($result);
         $this->num_data += $size;
-        return $result[$size - 1]['DATE'];
+        return $result[$size - 1]['STARTSPECDAY'];
     }
 
 }

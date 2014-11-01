@@ -10,7 +10,7 @@ class AutoCheckSeeder extends Seeder {
     public function run() {
         DB::table('auto_checks')->delete();
 
-        set_time_limit(300);
+        set_time_limit(0);
         $db = App::make('AccessDB');
         $query = new Query('CHECKINOUT', $db->get_dbh());
         $query->where('CHECKTIME', '>=', '2014-07-01');

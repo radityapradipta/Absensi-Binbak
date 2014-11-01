@@ -45,7 +45,7 @@ class AllowanceController extends BaseController {
             $contents.=$employee->ssn . ",";
             $contents.=$employee->name . ",";
 
-            $data = $employee->get_absence_data($month, $year);
+            $data = Session::pull($employee->id, 'default');
             $total+=$data['konsumsi_total'];
 
             $contents.=$data['normal_weekday'] . ",";
