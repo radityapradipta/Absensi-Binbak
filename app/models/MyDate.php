@@ -29,7 +29,7 @@ class MyDate {
      */
 
     public static function is_late($date_time, $schedule_time) {
-        $date_time = strtotime(date('H:i:s', strtotime($date_time)));
+        $date_time = strtotime(date('H:i', strtotime($date_time)));
         $schedule_time = strtotime("+1 minute", strtotime($schedule_time));
         return ($date_time > $schedule_time);
     }
@@ -55,9 +55,8 @@ class MyDate {
     }
 
     public static function is_holiday($date) {
-        $holiday = Holiday::where('start', '<=', "$date")->orderBy('start', 'DESC')->first();
-        $difference = (strtotime($date) - strtotime($holiday->start)) / (60 * 60 * 24);
-        if ($difference < $holiday->duration) {
+        $holiday = Holiday::where('start', '<=', $date)->where('end', '>=', $date)->count();
+        if ($holiday > 0) {
             return 1;
         } else {
             return 0;

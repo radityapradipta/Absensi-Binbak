@@ -1,1 +1,1 @@
-var url="http://localhost:8000/"; 
+var url="http://localhost/Absensi-Binbak/public/"; 

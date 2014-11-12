@@ -22,7 +22,7 @@ class ConverterController extends BaseController {
         $start = time();
         $converter = new AccessConverter();
         $num_data = $converter->convert();
-        return $num_data . ' data berhasil ditambahkan dalam ' . date('s', time() - $start) . ' detik';
+        return $num_data . ' data berhasil ditambahkan dalam ' . (time() - $start) . ' detik';
     }
 
 }

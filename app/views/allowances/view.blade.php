@@ -133,7 +133,6 @@
             <tr>
                 <th rowspan="2" class="thin-border">Kode</th>
                 <th rowspan="2" class="thick-border">Nama</th>
-                <!--<th rowspan="2">Unit</th>-->
 
                 <th colspan="2" class="thin-border">Normal</th>
                 <th colspan="3" class="thin-border">Pulang Awal</th>
@@ -170,12 +169,14 @@
                 <th class="thin-border">Pulang Awal</th>
                 <th>Total</th>
             </tr>		
-            <?php $total = 0; ?>
+            <?php
+            $total = 0;
+            $start = time();
+            ?>
             @foreach ($employees as $employee)	
             <tr class="allowance-row">
                 <td class="thin-border">{{ $employee->ssn or '-' }}</td>
                 <td class="thick-border">{{ $employee->name or '-' }}</td>
-<!--                <td>{{ $employee->department->name or '-' }}</td>-->
                 <?php
                 $data = $employee->get_absence_data($parameters['month'], $parameters['year']);
                 $total+=$data['konsumsi_total'];
@@ -204,13 +205,15 @@
                 <td class="number thin-border">{{ number_format($data['konsumsi_weekend'], 0, ',', '.') }}</td>
                 <td class="number thin-border">{{ number_format($data['konsumsi_pulang_awal'], 0, ',', '.') }}</td>
                 <td class="number">{{ number_format($data['konsumsi_total'], 0, ',', '.') }}</td>
-            </tr>	
+            </tr>
             @endforeach
+            <?php $end = time() ?>
             <tr>
                 <th colspan="20"></th>
                 <th class="number">{{ number_format($total, 0, ',', '.') }}</th>
             </tr>
-        </table>	
+        </table>
+        <div class="content_head">{{ 'Perhitungan uang makan berlangsung selama ' . ($end - $start) . ' detik' }}</div>
         @if(Auth::user()->role_id==1 || Auth::user()->role_id==3 || Auth::user()->role_id==4 )
         <div class="content_button">
             <button type="button" id="allowance-download-button" class="btn btn-primary-mod">Download</button>

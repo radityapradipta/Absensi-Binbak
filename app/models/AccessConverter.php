@@ -45,7 +45,7 @@ class AccessConverter {
         }
         $size = count($result);
         $this->num_data += $size;
-        return $result[$size - 1]['EXACTID'];
+        return $size > 0 ? $result[$size - 1]['EXACTID'] : $start;
     }
 
     public function check_inout($start) {
@@ -62,13 +62,13 @@ class AccessConverter {
         }
         $size = count($result);
         $this->num_data += $size;
-        return $result[$size - 1]['CHECKTIME'];
+        return $size > 0 ? $result[$size - 1]['CHECKTIME'] : $start;
     }
 
     public function user_speday($start) {
         $query = new Query('USER_SPEDAY', $this->dbh);
-        $query->where('STARTSPECDAY', '>', $start);
-        $query->order('STARTSPECDAY');
+        $query->where('DATE', '>', $start);
+        $query->order('DATE');
         $result = $query->get();
         foreach ($result as $row) {
             Absence::create(array(
@@ -81,7 +81,7 @@ class AccessConverter {
         }
         $size = count($result);
         $this->num_data += $size;
-        return $result[$size - 1]['STARTSPECDAY'];
+        return $size > 0 ? $result[$size - 1]['DATE'] : $start;
     }
 
 }

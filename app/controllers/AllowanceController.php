@@ -6,7 +6,7 @@ class AllowanceController extends BaseController {
 
     public function __construct() {
         $dept_id = Department::distinct()->lists('super_department_id');
-        $this->departments = Department::whereNotIn('id', $dept_id)->where('name', 'NOT LIKE', '%HONORER%')->get();
+        $this->departments = Department::whereNotIn('id', $dept_id)->where('name', 'NOT LIKE', '%HONORER%')->orderBy('name')->get();
     }
 
     public function view() {
@@ -22,7 +22,8 @@ class AllowanceController extends BaseController {
             return View::make('allowances.view', array('valid' => FALSE, 'departments' => $this->departments, 'parameters' => $parameters)); //data hanya tersedia utk bulan/tahun yg lewat
         }
 
-        $employees = Employee::where('department_id', '=', "$id")->get();
+        set_time_limit(0);
+        $employees = Employee::where('department_id', '=', "$id")->orderBy('name')->get();
         return View::make('allowances.view', array('valid' => TRUE, 'departments' => $this->departments, 'employees' => $employees, 'parameters' => $parameters));
     }
 
@@ -39,7 +40,7 @@ class AllowanceController extends BaseController {
         $contents.="KODE ,NAMA , NORMAL, ,PULANG AWAL, , ,TERLAMBAT ,LUPA ,TUGAS LUAR ,OTHER ,TIDAK MASUK , , ,JUMLAH HARI MASUK, ,JUMLAH HARI TIDAK MASUK ,NOMINAL UANG KONSUMSI \n";
         $contents.=" , ,WEEKDAY ,WEEKEND ,WEEKDAY < 12 ,WEEKDAY >= 12 ,WEEKEND, , , , ,SAKIT ,IZIN ,ALPHA ,WEEKDAY ,WEEKEND , ,WEEKDAY ,WEEKEND ,PULANG AWAL , TOTAL \n";
 
-        $employees = Employee::where('department_id', '=', $id)->get();
+        $employees = Employee::where('department_id', '=', $id)->orderBy('name')->get();
         $total = 0;
         foreach ($employees as $employee) {
             $contents.=$employee->ssn . ",";

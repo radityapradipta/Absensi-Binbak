@@ -15,10 +15,14 @@ class HolidaySeeder extends Seeder {
         $query->where('DURATION', '>', 0);
         $result = $query->get('HOLIDAYID,STARTTIME,DURATION');
         foreach ($result as $row) {
+            $start_time = strtotime($row['STARTTIME']);
+            $duration = $row['DURATION'] - 1;
+            $end_time = strtotime("+$duration days", $start_time);
             Holiday::create(array(
                 'id' => $row['HOLIDAYID'],
                 'start' => $row['STARTTIME'],
-                'duration' => $row['DURATION']
+                'duration' => $row['DURATION'],
+                'end' => date('Y-m-d H:i:s', $end_time)
             ));
         }
     }
