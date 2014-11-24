@@ -50,7 +50,9 @@ class AccessConverter {
 
     public function check_inout($start) {
         $query = new Query('CHECKINOUT', $this->dbh);
+        $end = date('Y-m-01');
         $query->where('CHECKTIME', '>', $start);
+        $query->where('CHECKTIME', '<', $end);
         $query->order('CHECKTIME');
         $result = $query->get('USERID,CHECKTIME,CHECKTYPE');
         foreach ($result as $row) {
@@ -62,12 +64,14 @@ class AccessConverter {
         }
         $size = count($result);
         $this->num_data += $size;
-        return $size > 0 ? $result[$size - 1]['CHECKTIME'] : $start;
+        return $size > 0 ? $end : $start;
     }
 
     public function user_speday($start) {
         $query = new Query('USER_SPEDAY', $this->dbh);
+        $end = date('Y-m-01');
         $query->where('DATE', '>', $start);
+        $query->where('DATE', '<', $end);
         $query->order('DATE');
         $result = $query->get();
         foreach ($result as $row) {
@@ -81,7 +85,7 @@ class AccessConverter {
         }
         $size = count($result);
         $this->num_data += $size;
-        return $size > 0 ? $result[$size - 1]['DATE'] : $start;
+        return $size > 0 ? $end : $start;
     }
 
 }

@@ -14,6 +14,7 @@ class AutoCheckSeeder extends Seeder {
         $db = App::make('AccessDB');
         $query = new Query('CHECKINOUT', $db->get_dbh());
         $query->where('CHECKTIME', '>=', '2014-07-01');
+        $query->where('CHECKTIME', '<', '2014-10-01');
         $query->order('CHECKTIME');
         $result = $query->get('USERID,CHECKTIME,CHECKTYPE');
         foreach ($result as $row) {
@@ -25,7 +26,7 @@ class AutoCheckSeeder extends Seeder {
         }
         $convert_file = public_path() . '\Last Convert.txt';
         $record = explode(';', file_get_contents($convert_file));
-        $record[2] = $result[count($result) - 1]['CHECKTIME'];
+        $record[2] = '2014-10-01';
         $file = fopen($convert_file, 'w');
         fwrite($file, implode(';', $record));
         fclose($file);

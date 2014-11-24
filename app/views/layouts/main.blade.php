@@ -51,7 +51,7 @@
         </section>
         {{ HTML::script('assets/js/jquery-1.11.1.min.js') }}
         {{ HTML::script('assets/js/modal.js') }}
-        {{ HTML::script('assets/js/jquery.form.js') }}
+        {{ HTML::script('assets/js/jquery.form.min.js') }}
         {{ HTML::script('assets/js/jquery.uploadfile.min.js') }}
         {{ HTML::script('js/url.js') }}
         {{ HTML::script('js/custom.js') }}

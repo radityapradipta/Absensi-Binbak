@@ -1,1 +1,1 @@
-var url="http://localhost/Absensi-Binbak/public/"; 
+var url="http://localhost/"; 
