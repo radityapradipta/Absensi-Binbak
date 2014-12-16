@@ -15,14 +15,10 @@ class CreateDepartmentsTable extends Migration {
             // ---------- FIELD ----------
             $table->integer('id')->unsigned();
             $table->string('name', 30);
-            $table->integer('weekday_nominal');
-            $table->integer('weekend_nominal');
-            $table->integer('cut_nominal');
 
             // ---------- KEY ----------
             $table->primary('id');
             $table->integer('super_department_id')->nullable(); //foreign key utk menunjuk parent departementnya
-//            $table->integer('allowance_id'); //foreign key utk menunjuk nominal uang konsumsi
             // ---------- OPTION ----------
             $table->softDeletes();
         });

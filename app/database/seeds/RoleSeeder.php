@@ -10,29 +10,16 @@ class RoleSeeder extends Seeder {
     public function run() {
         DB::table('roles')->delete();
 
-        Role::create(array(
-            'name' => 'Admin'
-        ));
+        $role = [
+            ['name' => 'Admin'],
+            ['name' => 'Yayasan'],
+            ['name' => 'SDM'],
+            ['name' => 'Keuangan'],
+            ['name' => 'Kepsek'],
+            ['name' => 'Tata Usaha']
+        ];
 
-        Role::create(array(
-            'name' => 'Yayasan'
-        ));
-
-        Role::create(array(
-            'name' => 'SDM'
-        ));
-
-        Role::create(array(
-            'name' => 'Keuangan'
-        ));
-
-        Role::create(array(
-            'name' => 'Kepsek'
-        ));
-
-        Role::create(array(
-            'name' => 'Tata Usaha'
-        ));
+        Role::insert($role);
     }
 
 }

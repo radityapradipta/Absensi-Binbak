@@ -13,8 +13,9 @@ class EmployeeSeeder extends Seeder {
         $db = App::make('AccessDB');
         $query = new Query('USERINFO', $db->get_dbh());
         $result = $query->get('USERID,SSN,Name,Gender,BIRTHDAY,street,DEFAULTDEPTID');
+        $result_array = [];
         foreach ($result as $row) {
-            Employee::create(array(
+            $result_array[] = [
                 'id' => $row['USERID'],
                 'ssn' => $row['SSN'],
                 'name' => $row['Name'],
@@ -22,7 +23,11 @@ class EmployeeSeeder extends Seeder {
                 'birthday' => $row['BIRTHDAY'],
                 'street' => $row['street'],
                 'department_id' => $row['DEFAULTDEPTID']
-            ));
+            ];
+        }
+        $employee = array_chunk($result_array, 1000);
+        foreach ($employee as $value) {
+            Employee::insert($value);
         }
     }
 

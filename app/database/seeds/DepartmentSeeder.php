@@ -13,15 +13,17 @@ class DepartmentSeeder extends Seeder {
         $db = App::make('AccessDB');
         $query = new Query('DEPARTMENTS', $db->get_dbh());
         $result = $query->get('DEPTID,DEPTNAME,SUPDEPTID');
+        $result_array = [];
         foreach ($result as $row) {
-            Department::create(array(
+            $result_array[] = [
                 'id' => $row['DEPTID'],
                 'name' => $row['DEPTNAME'],
-                'weekday_nominal' => 20000,
-                'weekend_nominal' => 5000,
-                'cut_nominal' => 5000,
                 'super_department_id' => $row['SUPDEPTID']
-            ));
+            ];
+        }
+        $department = array_chunk($result_array, 1000);
+        foreach ($department as $value) {
+            Department::insert($value);
         }
     }
 

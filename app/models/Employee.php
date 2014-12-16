@@ -45,8 +45,9 @@ class Employee extends Eloquent {
             'konsumsi_weekday' => 0, 'konsumsi_weekend' => 0, 'konsumsi_pulang_awal' => 0, 'konsumsi_total' => 0
         );
         if (!is_null($this->schedules()->first())) {
+            $weekly_schedules = $this->schedules()->orderBy('start_date', 'DESC')->first()->weekly_schedule()->get();
             //ambil data jadwal	
-            $schedule = $this->getSchedule();
+            $schedule = $this->getSchedule($weekly_schedules);
 
             if (!empty($schedule)) {
                 $terlambat = array('weekday' => 0, 'weekend' => 0);
@@ -60,12 +61,7 @@ class Employee extends Eloquent {
                 $end_time = strtotime("$year-$month-$end_day 00:00:00");
 
                 //ambil data uang konsumsi
-                $department = $this->department()->first();
-                $allowance = array('weekday' => $department->weekday_nominal, 'weekend' => $department->weekend_nominal, 'pulang_awal' => ($department->weekday_nominal - $department->cut_nominal));
-
-                //ambil data absen
-                $absence = $this->absences()->where('start_date', '>=', "$year-$month-01")->where('end_date', '<=', "$year-$month-$end_day")->orderBy('start_date')->get();
-                $abs_idx = 0;
+                $allowance = $this->getAllowance($weekly_schedules);
 
                 //iterasi perhari dari awal bulan hingga akhir bulan
                 for ($i = $start_time; $i <= $end_time; $i = strtotime("+1 day", $i)) {
@@ -74,9 +70,10 @@ class Employee extends Eloquent {
                     if ($current_day != 0) {//hari minggu tdk dihitung
                         $current_date_start = date('Y-m-d 00:00:00', $i);
                         $alpha = TRUE;
+                        $absence = $this->absences()->where('start_date', '<=', $current_date_start)->where('end_date', '>=', $current_date_start)->first();
                         //periksa attendance
-                        if (count($absence) > $abs_idx && $absence[$abs_idx]['start_date'] . ' 00:00:00' == $current_date_start) {
-                            $category_id = $absence[$abs_idx]['absence_category_id'];
+                        if (!is_null($absence)) {
+                            $category_id = $absence['absence_category_id'];
                             switch ($category_id) {
                                 case 3:
                                     $current_day != 6 ? $other['weekday'] ++ : $other['weekend'] ++;
@@ -97,7 +94,6 @@ class Employee extends Eloquent {
                                     $data['lupa'] ++;
                                     break;
                             }
-                            $abs_idx++;
                             $alpha = FALSE;
                         }
                         if ($alpha) {
@@ -179,9 +175,8 @@ class Employee extends Eloquent {
         return $data;
     }
 
-    public function getSchedule() {
+    public function getSchedule($weekly_schedules) {
         $schedule = array(); //array jadwal per hari dlm 1 minggu, indeks 1=senin .... 7=minggu
-        $weekly_schedules = $this->schedules()->orderBy('start_date', 'DESC')->first()->weekly_schedule()->get();
         foreach ($weekly_schedules as $ws) {
             $dailySchedule = $ws->dailySchedule()->first();
             $i = $ws['start_day'];
@@ -191,6 +186,13 @@ class Employee extends Eloquent {
             $schedule[$i] = $dailySchedule;
         }
         return $schedule;
+    }
+
+    public function getAllowance($weekly_schedules) {
+        $allow = $weekly_schedules[0]->allowance()->first();
+        $allowance = array('weekday' => $allow->weekday_nominal, 'weekend' => $allow->weekend_nominal,
+            'pulang_awal' => ($allow->weekday_nominal - $allow->cut_nominal));
+        return $allowance;
     }
 
 }

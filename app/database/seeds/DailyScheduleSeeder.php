@@ -13,13 +13,18 @@ class DailyScheduleSeeder extends Seeder {
         $db = App::make('AccessDB');
         $query = new Query('SCHCLASS', $db->get_dbh());
         $result = $query->get('SCHCLASSID,SCHNAME,STARTTIME,ENDTIME');
+        $result_array = [];
         foreach ($result as $row) {
-            DailySchedule::create(array(
+            $result_array[] = [
                 'id' => $row['SCHCLASSID'],
                 'name' => $row['SCHNAME'],
                 'start_time' => $row['STARTTIME'],
                 'end_time' => $row['ENDTIME']
-            ));
+            ];
+        }
+        $daily_schedule = array_chunk($result_array, 1000);
+        foreach ($daily_schedule as $value) {
+            DailySchedule::insert($value);
         }
     }
 

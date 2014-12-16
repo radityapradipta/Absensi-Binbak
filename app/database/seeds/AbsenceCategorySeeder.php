@@ -10,40 +10,38 @@ class AbsenceCategorySeeder extends Seeder {
     public function run() {
         DB::table('absence_categories')->delete();
 
-        AbsenceCategory::create(array(
-            'id' => 2,
-            'name' => 'vacation'
-        ));
+        $absenceCategory = [
+            [
+                'id' => 2,
+                'name' => 'vacation'
+            ],
+            [
+                'id' => 3,
+                'name' => 'other'
+            ],
+            [
+                'id' => 4,
+                'name' => 'tugas luar'
+            ],
+            [
+                'id' => 5,
+                'name' => 'izin'
+            ],
+            [
+                'id' => 6,
+                'name' => 'cuti'
+            ],
+            [
+                'id' => 7,
+                'name' => 'sakit'
+            ],
+            [
+                'id' => 8,
+                'name' => 'lupa'
+            ]
+        ];
 
-        AbsenceCategory::create(array(
-            'id' => 3,
-            'name' => 'other'
-        ));
-
-        AbsenceCategory::create(array(
-            'id' => 4,
-            'name' => 'tugas luar'
-        ));
-
-        AbsenceCategory::create(array(
-            'id' => 5,
-            'name' => 'izin'
-        ));
-
-        AbsenceCategory::create(array(
-            'id' => 6,
-            'name' => 'cuti'
-        ));
-
-        AbsenceCategory::create(array(
-            'id' => 7,
-            'name' => 'sakit'
-        ));
-
-        AbsenceCategory::create(array(
-            'id' => 8,
-            'name' => 'lupa'
-        ));
+        AbsenceCategory::insert($absenceCategory);
     }
 
 }
