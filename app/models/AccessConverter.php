@@ -18,6 +18,7 @@ class AccessConverter {
         $starts[1] = $this->check_exact($starts[1]);
         $starts[2] = $this->check_inout($starts[2]);
         $starts[3] = $this->holidays($starts[3]);
+        $starts[4] = $this->user_of_run($starts[4]);
         $this->updateFile($starts);
         return $this->num_data;
     }
@@ -96,6 +97,29 @@ class AccessConverter {
         $size = count($result);
         $this->num_data += $size;
         return $size > 0 ? $result[$size - 1]['HOLIDAYID'] : $start;
+    }
+
+    public function user_of_run($start) {
+        $query = new Query('USER_OF_RUN', $this->dbh);
+        $query->where('STARTDATE', '>', $start);
+        $query->order('STARTDATE');
+        $result = $query->get('STARTDATE,ENDDATE,USERID,NUM_OF_RUN_ID');
+        $result_array = [];
+        foreach ($result as $row) {
+            $result_array[] = [
+                'start_date' => $row['STARTDATE'],
+                'end_date' => $row['ENDDATE'],
+                'employee_id' => $row['USERID'],
+                'weekly_schedule_id' => $row['NUM_OF_RUN_ID']
+            ];
+        }
+        $schedule = array_chunk($result_array, 1000);
+        foreach ($schedule as $value) {
+            Schedule::insert($value);
+        }
+        $size = count($result);
+        $this->num_data += $size;
+        return $size > 0 ? $result[$size - 1]['STARTDATE'] : $start;
     }
 
     public function user_speday($start) {

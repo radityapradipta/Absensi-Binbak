@@ -31,7 +31,7 @@ class AutoCheckSeeder extends Seeder {
         }
         $convert_file = public_path() . '\Last Convert.txt';
         $record = explode(';', file_get_contents($convert_file));
-        $record[2] = '2014-10-01';
+        $record[2] = '2014-12-01';
         $file = fopen($convert_file, 'w');
         fwrite($file, implode(';', $record));
         fclose($file);

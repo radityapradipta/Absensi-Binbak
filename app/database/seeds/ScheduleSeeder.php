@@ -12,6 +12,7 @@ class ScheduleSeeder extends Seeder {
 
         $db = App::make('AccessDB');
         $query = new Query('USER_OF_RUN', $db->get_dbh());
+        $query->order('STARTDATE');
         $result = $query->get('STARTDATE,ENDDATE,USERID,NUM_OF_RUN_ID');
         $result_array = [];
         foreach ($result as $row) {
@@ -26,6 +27,12 @@ class ScheduleSeeder extends Seeder {
         foreach ($schedule as $value) {
             Schedule::insert($value);
         }
+        $convert_file = public_path() . '\Last Convert.txt';
+        $record = explode(';', file_get_contents($convert_file));
+        $record[4] = $result[count($result) - 1]['STARTDATE'];
+        $file = fopen($convert_file, 'w');
+        fwrite($file, implode(';', $record));
+        fclose($file);
     }
 
 }
