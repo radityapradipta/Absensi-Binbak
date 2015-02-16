@@ -111,8 +111,13 @@ class Employee extends Eloquent {
                                     $parsed_date['hour'] < 12 ? $in = $auto[0] : $in = $this->manualChecks()->whereBetween('date_time', array($current_date_start, $current_date_end))
                                                             ->where('is_in', '=', 1)->orderBy('date_time')->first();
                                 }
-                                $size_auto >= 2 || ($in != null && $auto[$size_auto - 1]['is_in'] == 0) ? $out = $auto[$size_auto - 1] : $out = $this->manualChecks()->whereBetween('date_time', array($current_date_start, $current_date_end))
-                                                        ->where('is_in', '=', 0)->orderBy('date_time', 'DESC')->first();
+                                if ($size_auto >= 2 || $in != null) {
+                                    $parsed_date = date_parse($auto[$size_auto - 1]['date_time']);
+                                    $auto[$size_auto - 1]['is_in'] == 0 || $parsed_date['hour'] > 9 ? $out = $auto[$size_auto - 1] : $out = $this->manualChecks()->whereBetween('date_time', array($current_date_start, $current_date_end))
+                                                            ->where('is_in', '=', 0)->orderBy('date_time', 'DESC')->first();
+                                }
+//                                $size_auto >= 2 || ($in != null && $auto[$size_auto - 1]['is_in'] == 0) ? $out = $auto[$size_auto - 1] : $out = $this->manualChecks()->whereBetween('date_time', array($current_date_start, $current_date_end))
+//                                                        ->where('is_in', '=', 0)->orderBy('date_time', 'DESC')->first();
                                 // --- selesai
 
                                 if (!is_null($in)) {

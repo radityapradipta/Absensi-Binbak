@@ -12,6 +12,7 @@ class WeeklyScheduleSeeder extends Seeder {
 
         $db = App::make('AccessDB');
         $query = new Query('NUM_RUN_DEIL', $db->get_dbh());
+        $query->order('NUM_RUNID');
         $result = $query->get('NUM_RUNID,STARTTIME,ENDTIME,SDAYS,EDAYS,SCHCLASSID');
         $result_array = [];
         foreach ($result as $row) {
@@ -40,6 +41,12 @@ class WeeklyScheduleSeeder extends Seeder {
         foreach ($weekly_schedule as $value) {
             WeeklySchedule::insert($value);
         }
+        $convert_file = public_path() . '\Last Convert.txt';
+        $record = explode(';', file_get_contents($convert_file));
+        $record[3] = $result[count($result) - 1]['NUM_RUNID'];
+        $file = fopen($convert_file, 'w');
+        fwrite($file, implode(';', $record));
+        fclose($file);
     }
 
 }

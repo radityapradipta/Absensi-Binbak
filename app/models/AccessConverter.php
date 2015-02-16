@@ -14,11 +14,14 @@ class AccessConverter {
         set_time_limit(0);
         $this->num_data = 0;
         $starts = $this->readFile();
-        $starts[0] = $this->user_speday($starts[0]);
-        $starts[1] = $this->check_exact($starts[1]);
-        $starts[2] = $this->check_inout($starts[2]);
-        $starts[3] = $this->holidays($starts[3]);
-        $starts[4] = $this->user_of_run($starts[4]);
+        $starts[0] = $this->check_exact($starts[0]);
+        $starts[1] = $this->check_inout($starts[1]);
+        $starts[2] = $this->holidays($starts[2]);
+        $starts[3] = $this->num_run_deil($starts[3]);
+        $starts[4] = $this->schclass($starts[4]);
+        $starts[5] = $this->user_of_run($starts[5]);
+        $starts[6] = $this->user_speday($starts[6]);
+        $starts[7] = $this->userinfo($starts[7]);
         $this->updateFile($starts);
         return $this->num_data;
     }
@@ -87,16 +90,66 @@ class AccessConverter {
             $start_time = strtotime($row['STARTTIME']);
             $duration = $row['DURATION'] - 1;
             $end_time = strtotime("+$duration days", $start_time);
-            Holiday::create(array(
+            Holiday::create([
                 'id' => $row['HOLIDAYID'],
                 'start' => $row['STARTTIME'],
                 'duration' => $row['DURATION'],
                 'end' => date('Y-m-d H:i:s', $end_time)
-            ));
+            ]);
         }
         $size = count($result);
         $this->num_data += $size;
         return $size > 0 ? $result[$size - 1]['HOLIDAYID'] : $start;
+    }
+
+    public function num_run_deil($start) {
+        $query = new Query('NUM_RUN_DEIL', $this->dbh);
+        $query->where('NUM_RUNID', '>', $start);
+        $query->order('NUM_RUNID');
+        $result = $query->get('NUM_RUNID,STARTTIME,ENDTIME,SDAYS,EDAYS,SCHCLASSID');
+        foreach ($result as $row) {
+            $allowance_id = 0;
+            if ($row['SDAYS'] != 6) {
+                $end = date_parse($row['ENDTIME']);
+                $start = date_parse($row['STARTTIME']);
+                $duration = (mktime($end['hour'], $end['minute']) - mktime($start['hour'], $start['minute'])) / 3600;
+                if ($duration >= 8) {
+                    $allowance_id = 1;
+                } else if ($duration < 7) {
+                    $allowance_id = 3;
+                } else {
+                    $allowance_id = 2;
+                }
+            }
+            WeeklySchedule::create([
+                'id' => $row['NUM_RUNID'],
+                'start_day' => $row['SDAYS'],
+                'end_day' => $row['EDAYS'],
+                'daily_schedule_id' => $row['SCHCLASSID'],
+                'allowance_id' => $allowance_id
+            ]);
+        }
+        $size = count($result);
+        $this->num_data += $size;
+        return $size > 0 ? $result[$size - 1]['NUM_RUNID'] : $start;
+    }
+
+    public function schclass($start) {
+        $query = new Query('SCHCLASS', $this->dbh);
+        $query->where('SCHCLASSID', '>', $start);
+        $query->order('SCHCLASSID');
+        $result = $query->get('SCHCLASSID,SCHNAME,STARTTIME,ENDTIME');
+        foreach ($result as $row) {
+            DailySchedule::create([
+                'id' => $row['SCHCLASSID'],
+                'name' => $row['SCHNAME'],
+                'start_time' => $row['STARTTIME'],
+                'end_time' => $row['ENDTIME']
+            ]);
+        }
+        $size = count($result);
+        $this->num_data += $size;
+        return $size > 0 ? $result[$size - 1]['SCHCLASSID'] : $start;
     }
 
     public function user_of_run($start) {
@@ -104,18 +157,13 @@ class AccessConverter {
         $query->where('STARTDATE', '>', $start);
         $query->order('STARTDATE');
         $result = $query->get('STARTDATE,ENDDATE,USERID,NUM_OF_RUN_ID');
-        $result_array = [];
         foreach ($result as $row) {
-            $result_array[] = [
+            Schedule::create([
                 'start_date' => $row['STARTDATE'],
                 'end_date' => $row['ENDDATE'],
                 'employee_id' => $row['USERID'],
                 'weekly_schedule_id' => $row['NUM_OF_RUN_ID']
-            ];
-        }
-        $schedule = array_chunk($result_array, 1000);
-        foreach ($schedule as $value) {
-            Schedule::insert($value);
+            ]);
         }
         $size = count($result);
         $this->num_data += $size;
@@ -146,6 +194,27 @@ class AccessConverter {
         $size = count($result);
         $this->num_data += $size;
         return $size > 0 ? $result[$size - 1]['DATE'] : $start;
+    }
+
+    public function userinfo($start) {
+        $query = new Query('USERINFO', $this->dbh);
+        $query->where('USERID', '>', $start);
+        $query->order('USERID');
+        $result = $query->get('USERID,SSN,Name,Gender,BIRTHDAY,street,DEFAULTDEPTID');
+        foreach ($result as $row) {
+            Employee::create([
+                'id' => $row['USERID'],
+                'ssn' => $row['SSN'],
+                'name' => $row['Name'],
+                'is_male' => $row['Gender'] == 'Male' ? 1 : 0,
+                'birthday' => $row['BIRTHDAY'],
+                'street' => $row['street'],
+                'department_id' => $row['DEFAULTDEPTID']
+            ]);
+        }
+        $size = count($result);
+        $this->num_data += $size;
+        return $size > 0 ? $result[$size - 1]['USERID'] : $start;
     }
 
 }

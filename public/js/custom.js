@@ -21,7 +21,7 @@ $(document).ready(function() {
 
     $("#allowance-select").change(function() {
         var id = $("#allowance-select").val();
-        window.location.replace(url + "allowance/manage/department/" + id + "/");
+        window.location.replace(url + "allowance/manage/category/" + id + "/");
     });
 
     $("#allowance-save").click(function() {

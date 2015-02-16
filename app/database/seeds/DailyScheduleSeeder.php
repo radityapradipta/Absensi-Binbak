@@ -12,6 +12,7 @@ class DailyScheduleSeeder extends Seeder {
 
         $db = App::make('AccessDB');
         $query = new Query('SCHCLASS', $db->get_dbh());
+        $query->order('SCHCLASSID');
         $result = $query->get('SCHCLASSID,SCHNAME,STARTTIME,ENDTIME');
         $result_array = [];
         foreach ($result as $row) {
@@ -26,6 +27,12 @@ class DailyScheduleSeeder extends Seeder {
         foreach ($daily_schedule as $value) {
             DailySchedule::insert($value);
         }
+        $convert_file = public_path() . '\Last Convert.txt';
+        $record = explode(';', file_get_contents($convert_file));
+        $record[4] = $result[count($result) - 1]['SCHCLASSID'];
+        $file = fopen($convert_file, 'w');
+        fwrite($file, implode(';', $record));
+        fclose($file);
     }
 
 }

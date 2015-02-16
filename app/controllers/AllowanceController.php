@@ -3,10 +3,12 @@
 class AllowanceController extends BaseController {
 
     private $departments;
+    private $allowances;
 
     public function __construct() {
         $dept_id = Department::distinct()->lists('super_department_id');
         $this->departments = Department::whereNotIn('id', $dept_id)->where('name', 'NOT LIKE', '%HONORER%')->orderBy('name')->get();
+        $this->allowances = Allowance::all();
     }
 
     public function view() {
@@ -83,18 +85,18 @@ class AllowanceController extends BaseController {
     }
 
     public function manage() {
-        return View::make('allowances.manage', array('departments' => $this->departments));
+        return View::make('allowances.manage', array('allowances' => $this->allowances));
     }
 
-    public function manageDepartment($id) {
-        $dept = Department::find($id);
-        return View::make('allowances.manage', array('departments' => $this->departments, 'dept' => $dept));
+    public function manageAllowance($id) {
+        $allow = Allowance::find($id);
+        return View::make('allowances.manage', array('allowances' => $this->allowances, 'allow' => $allow));
     }
 
     public function applyChange() {
         $param = Input::all();
-        $department = Department::find($param['id']);
-        $department->edit($param);
+        $allowance = Allowance::find($param['id']);
+        $allowance->edit($param);
         return Response::json(array('valid' => TRUE));
     }
 

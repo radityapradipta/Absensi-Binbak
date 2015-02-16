@@ -29,7 +29,7 @@ class ScheduleSeeder extends Seeder {
         }
         $convert_file = public_path() . '\Last Convert.txt';
         $record = explode(';', file_get_contents($convert_file));
-        $record[4] = $result[count($result) - 1]['STARTDATE'];
+        $record[5] = $result[count($result) - 1]['STARTDATE'];
         $file = fopen($convert_file, 'w');
         fwrite($file, implode(';', $record));
         fclose($file);

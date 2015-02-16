@@ -70,8 +70,8 @@ Route::group(array('before' => 'auth', 'prefix' => 'allowance'), function() {
         'uses' => 'AllowanceController@manage'
     ));
 
-    Route::get('manage/department/{id}', array(
-        'uses' => 'AllowanceController@manageDepartment'
+    Route::get('manage/category/{id}', array(
+        'uses' => 'AllowanceController@manageAllowance'
     ));
 
     Route::put('manage', array(
