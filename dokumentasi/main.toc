@@ -7,11 +7,11 @@
 \contentsline {subsection}{\numberline {2.2}Lingkungan Pendukung}{2}{subsection.2.2}
 \contentsline {section}{\numberline {3}Manual}{3}{section.3}
 \contentsline {subsection}{\numberline {3.1}Petunjuk Instalasi}{3}{subsection.3.1}
-\contentsline {subsection}{\numberline {3.2}Petunjuk Pemakaian}{3}{subsection.3.2}
-\contentsline {subsubsection}{\numberline {3.2.1}Halaman \textit {Log In}}{3}{subsubsection.3.2.1}
-\contentsline {subsubsection}{\numberline {3.2.2}Halaman \textit {Dashboard}}{4}{subsubsection.3.2.2}
-\contentsline {subsubsection}{\numberline {3.2.3}Halaman \textit {View Allowance}}{5}{subsubsection.3.2.3}
-\contentsline {subsubsection}{\numberline {3.2.4}Halaman \textit {Manage Allowance}}{6}{subsubsection.3.2.4}
-\contentsline {subsubsection}{\numberline {3.2.5}Halaman \textit {Manage User}}{7}{subsubsection.3.2.5}
-\contentsline {subsubsection}{\numberline {3.2.6}Halaman \textit {Convert Document}}{9}{subsubsection.3.2.6}
-\contentsline {subsubsection}{\numberline {3.2.7}Halaman \textit {Edit Profile}}{10}{subsubsection.3.2.7}
+\contentsline {subsection}{\numberline {3.2}Petunjuk Pemakaian}{4}{subsection.3.2}
+\contentsline {subsubsection}{\numberline {3.2.1}Halaman \textit {Log In}}{4}{subsubsection.3.2.1}
+\contentsline {subsubsection}{\numberline {3.2.2}Halaman \textit {Dashboard}}{5}{subsubsection.3.2.2}
+\contentsline {subsubsection}{\numberline {3.2.3}Halaman \textit {View Allowance}}{6}{subsubsection.3.2.3}
+\contentsline {subsubsection}{\numberline {3.2.4}Halaman \textit {Manage Allowance}}{7}{subsubsection.3.2.4}
+\contentsline {subsubsection}{\numberline {3.2.5}Halaman \textit {Manage User}}{8}{subsubsection.3.2.5}
+\contentsline {subsubsection}{\numberline {3.2.6}Halaman \textit {Convert Document}}{10}{subsubsection.3.2.6}
+\contentsline {subsubsection}{\numberline {3.2.7}Halaman \textit {Edit Profile}}{11}{subsubsection.3.2.7}

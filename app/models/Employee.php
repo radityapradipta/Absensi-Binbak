@@ -69,7 +69,6 @@ class Employee extends Eloquent {
 
                     if ($current_day != 0) {//hari minggu tdk dihitung
                         $current_date_start = date('Y-m-d 00:00:00', $i);
-                        $alpha = TRUE;
                         $absence = $this->absences()->where('start_date', '<=', $current_date_start)->where('end_date', '>=', $current_date_start)->first();
                         //periksa attendance
                         if (!is_null($absence)) {
@@ -94,16 +93,15 @@ class Employee extends Eloquent {
                                     $data['lupa'] ++;
                                     break;
                             }
-                            $alpha = FALSE;
-                        }
-                        if ($alpha) {
+                        } else {
                             $holiday = MyDate::is_holiday(date('Y-m-d', $i));
                             $current_date_end = date('Y-m-d 23:59:59', $i);
                             $auto = $this->autoChecks()->whereBetween('date_time', array($current_date_start, $current_date_end))->orderBy('date_time')->get();
                             $size_auto = count($auto);
-                            if ($holiday != 1 || ($holiday == 1 && $size_auto > 0)) {
+                            if ($holiday != 1/* || $size_auto > 0 */) {
                                 $in = null;
                                 $out = null;
+                                $alpha = TRUE;
 
                                 // --- tanpa memperhitungkan perbedaan check in & check out
                                 if ($size_auto > 0) {
@@ -116,8 +114,6 @@ class Employee extends Eloquent {
                                     $auto[$size_auto - 1]['is_in'] == 0 || $parsed_date['hour'] > 9 ? $out = $auto[$size_auto - 1] : $out = $this->manualChecks()->whereBetween('date_time', array($current_date_start, $current_date_end))
                                                             ->where('is_in', '=', 0)->orderBy('date_time', 'DESC')->first();
                                 }
-//                                $size_auto >= 2 || ($in != null && $auto[$size_auto - 1]['is_in'] == 0) ? $out = $auto[$size_auto - 1] : $out = $this->manualChecks()->whereBetween('date_time', array($current_date_start, $current_date_end))
-//                                                        ->where('is_in', '=', 0)->orderBy('date_time', 'DESC')->first();
                                 // --- selesai
 
                                 if (!is_null($in)) {
@@ -134,23 +130,19 @@ class Employee extends Eloquent {
                                         if (MyDate::is_early($out['date_time'], $schedule[$current_day]['end_time'])) {
                                             if ($current_day == 6) {//hari sabtu
                                                 $data['pulang_awal_weekend'] ++;
-                                                $alpha = FALSE;
                                             } else if (MyDate::is_before_12($out['date_time'])) {
                                                 $data['pulang_awal_weekday_before_12'] ++;
-                                                $alpha = FALSE;
                                             } else {
                                                 $data['pulang_awal_weekday'] ++;
-                                                $alpha = FALSE;
                                             }
                                         } else {
                                             if ($current_day == 6) {//hari sabtu
                                                 $data['normal_weekend'] ++;
-                                                $alpha = FALSE;
                                             } else {
                                                 $data['normal_weekday'] ++;
-                                                $alpha = FALSE;
                                             }
                                         }
+                                        $alpha = FALSE;
                                     }
                                 }
 
