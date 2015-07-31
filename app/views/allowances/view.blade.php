@@ -139,7 +139,8 @@
                 <th rowspan="2" class="thin-border">Terlambat</th>
 
                 <th rowspan="2" class="thin-border">Lupa</th>
-                <th rowspan="2" class="thin-border">Tugas Luar</th>
+                <!--<th rowspan="2" class="thin-border">Tugas Luar</th>-->
+                <th colspan="2" class="thin-border">Tugas Luar</th>
                 <th rowspan="2" class="thin-border">Other</th>
 
                 <th colspan="3" class="thick-border">Tidak Masuk</th>
@@ -155,6 +156,9 @@
 
                 <th class="thin-border">Weekday<br/>&lt; 12</th>
                 <th class="thin-border">Weekday<br/>&gt;= 12</th>			
+                <th class="thin-border">Weekend</th>
+
+                <th class="thin-border">Weekday</th>
                 <th class="thin-border">Weekend</th>
 
                 <th class="thin-border">Sakit</th>
@@ -190,7 +194,8 @@
                 <td class="number thin-border">{{ $data['terlambat'] }}</td>				
                 <td class="number thin-border">{{ $data['lupa'] }}</td>
 
-                <td class="number thin-border">{{ $data['tugas_luar'] }}</td>
+                <td class="number thin-border">{{ $data['tugas_luar_weekday'] }}</td>
+                <td class="number thin-border">{{ $data['tugas_luar_weekend'] }}</td>
                 <td class="number thin-border">{{ $data['other'] }}</td>
 
                 <td class="number allowance thin-border">{{ $data['sakit'] }}</td>
@@ -209,7 +214,7 @@
             @endforeach
             <?php $end = time() ?>
             <tr>
-                <th colspan="20"></th>
+                <th colspan="21"></th>
                 <th class="number">{{ number_format($total, 0, ',', '.') }}</th>
             </tr>
         </table>

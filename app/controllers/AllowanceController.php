@@ -39,8 +39,8 @@ class AllowanceController extends BaseController {
         $contents.= "Bulan: ," . $months[$month - 1] . "\n";
         $contents.= "Tahun: ," . $year . "\n\n";
 
-        $contents.="KODE ,NAMA , NORMAL, ,PULANG AWAL, , ,TERLAMBAT ,LUPA ,TUGAS LUAR ,OTHER ,TIDAK MASUK , , ,JUMLAH HARI MASUK, ,JUMLAH HARI TIDAK MASUK ,NOMINAL UANG KONSUMSI \n";
-        $contents.=" , ,WEEKDAY ,WEEKEND ,WEEKDAY < 12 ,WEEKDAY >= 12 ,WEEKEND, , , , ,SAKIT ,IZIN ,ALPHA ,WEEKDAY ,WEEKEND , ,WEEKDAY ,WEEKEND ,PULANG AWAL , TOTAL \n";
+        $contents.="KODE,NAMA,NORMAL,,PULANG AWAL,,,TERLAMBAT,LUPA,TUGAS LUAR,,OTHER,TIDAK MASUK,,,JUMLAH HARI MASUK,,JUMLAH HARI TIDAK MASUK,NOMINAL UANG KONSUMSI\n";
+        $contents.=",,WEEKDAY,WEEKEND,WEEKDAY < 12,WEEKDAY >= 12,WEEKEND,,,WEEKDAY,WEEKEND,,SAKIT,IZIN,ALPHA,WEEKDAY,WEEKEND,,WEEKDAY,WEEKEND,PULANG AWAL,TOTAL\n";
 
         $employees = Employee::where('department_id', '=', $id)->orderBy('name')->get();
         $total = 0;
@@ -58,7 +58,8 @@ class AllowanceController extends BaseController {
             $contents.=$data['pulang_awal_weekend'] . ",";
             $contents.=$data['terlambat'] . ",";
             $contents.=$data['lupa'] . ",";
-            $contents.=$data['tugas_luar'] . ",";
+            $contents.=$data['tugas_luar_weekday'] . ",";
+            $contents.=$data['tugas_luar_weekend'] . ",";
             $contents.=$data['other'] . ",";
             $contents.=$data['sakit'] . ",";
             $contents.=$data['izin'] . ",";
@@ -73,7 +74,7 @@ class AllowanceController extends BaseController {
 
             $contents.="\n";
         }
-        $contents.=",,,,,,,,,,,,,,,,,,,," . $total;
+        $contents.=",,,,,,,,,,,,,,,,,,,,," . $total;
 
 //        $file_name = "allowance.csv";
         $file = public_path() . "/download/allowance.csv";
